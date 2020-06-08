@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class MovingToNextScene : MonoBehaviour
 {
-    [SerializeField] private int indexOfNewLevel;
-
+    public int indexOfNewLevel;
+    public int amountOfPassesToMove = 0;
+    public int collectedPasses = 0;
+  
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && collectedPasses == amountOfPassesToMove)
         {
             SceneManager.LoadScene(indexOfNewLevel);
         }
-    }
+     }  
 }

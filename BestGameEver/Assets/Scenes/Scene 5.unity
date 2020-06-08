@@ -191,7 +191,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 811022607
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.03333336, y: 0.03333336, z: 0}
@@ -13119,8 +13119,9 @@ GameObject:
   - component: {fileID: 1063056564}
   - component: {fileID: 1063056565}
   - component: {fileID: 1063056566}
-  - component: {fileID: 1063056567}
   - component: {fileID: 1063056568}
+  - component: {fileID: 1063056567}
+  - component: {fileID: 1063056569}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -13206,9 +13207,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 1
   m_Mass: 1.4211382
-  m_LinearDrag: 1
+  m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: cffd32af088214d41b2b1ed4ca0969a0, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -13249,19 +13250,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1063056562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 005f609d8f1d8d0449f1b4e67cd1ed14, type: 3}
+  m_Script: {fileID: 11500000, guid: 945a492c13189154eb1eee75baba4cf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1063056565}
-  jumpForce: 8
-  moveInput: 13
-  speed: 10
+  rb: {fileID: 0}
+  jumpForce: 16
+  moveInput: 6
+  speed: 6
   groundCheck: {fileID: 1170955839}
   checkRadius: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2
-  amountOfJumps: 2
 --- !u!68 &1063056568
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -13280,6 +13280,20 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.61144924, y: -1.0327095}
   - {x: 0.4099455, y: -1.0327095}
+--- !u!114 &1063056569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063056562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e308995d137c26d4cad1152ad3a682c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
 --- !u!1 &1170955838
 GameObject:
   m_ObjectHideFlags: 0

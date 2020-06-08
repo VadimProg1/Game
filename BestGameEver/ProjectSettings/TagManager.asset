@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Key
+  - Door1
   layers:
   - Default
   - TransparentFX
@@ -46,6 +48,9 @@ TagManager:
     locked: 0
   - name: Entity
     uniqueID: 3456577387
+    locked: 0
+  - name: Platform
+    uniqueID: 289151417
     locked: 0
   - name: Fore
     uniqueID: 811022607

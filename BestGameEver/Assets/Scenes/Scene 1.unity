@@ -191,7 +191,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 811022607
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.03333336, y: 0.03333336, z: 0}
@@ -12974,6 +12974,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   indexOfNewLevel: 1
+  amountOfPassesToMove: 0
+  collectedPasses: 0
 --- !u!61 &897468724
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13025,6 +13027,7 @@ GameObject:
   - component: {fileID: 1063056563}
   - component: {fileID: 1063056564}
   - component: {fileID: 1063056565}
+  - component: {fileID: 1063056569}
   - component: {fileID: 1063056567}
   - component: {fileID: 1063056566}
   - component: {fileID: 1063056568}
@@ -13156,19 +13159,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1063056562}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 005f609d8f1d8d0449f1b4e67cd1ed14, type: 3}
+  m_Script: {fileID: 11500000, guid: e308995d137c26d4cad1152ad3a682c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1063056565}
-  jumpForce: 10
-  moveInput: 13
-  speed: 8
-  groundCheck: {fileID: 788731434}
-  checkRadius: 0.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 2
-  amountOfJumps: 2
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
 --- !u!68 &1063056568
 EdgeCollider2D:
   m_ObjectHideFlags: 0
@@ -13187,3 +13182,24 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.5994415, y: -0.92317665}
   - {x: 0.42076206, y: -0.9231769}
+--- !u!114 &1063056569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063056562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 945a492c13189154eb1eee75baba4cf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  jumpForce: 15
+  moveInput: 7
+  speed: 7
+  groundCheck: {fileID: 788731434}
+  checkRadius: 0.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 2
