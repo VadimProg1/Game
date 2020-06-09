@@ -21,36 +21,83 @@ public class PlayerController : MonoBehaviour
     private int jumpCount;
 
     private bool facingRight = true;
+    public float dashTime;
+    private float tempDashTime;
+    public bool dashing;
+    public float dashSpeed;
+    public float dashTimeCooldown;
+    private float  tempDashTimeCooldown;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();     
+        rb = GetComponent<Rigidbody2D>();
+        tempDashTime = dashTime;
+        tempDashTimeCooldown = dashTimeCooldown;
     }
 
     private void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-        if (isGrounded)
+        if (!dashing)
         {
-            jumpCount = 1;
-        }
-        moveInput = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
-        if((!facingRight && moveInput > 0) || (facingRight && moveInput < 0))
-        {
-            Flip();
+            isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
+            if (isGrounded)
+            {
+                jumpCount = 1;
+            }
+            moveInput = Input.GetAxis("Horizontal");
+            rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+            if ((!facingRight && moveInput > 0) || (facingRight && moveInput < 0))
+            {
+                Flip();
+            }
         }
     }
 
     private void Update()
     {
-        moveInput = Input.GetAxis("Horizontal");
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.F) && tempDashTimeCooldown <= 0)
         {
-            Jump();
+            tempDashTimeCooldown = dashTimeCooldown;
+            dashing = true;
+        }
+
+        if (!dashing)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                Jump();
+            }
+
+            tempDashTimeCooldown -= Time.deltaTime;
+        }
+        else
+        {
+               if (tempDashTime > 0)
+               {
+                  tempDashTime -= Time.deltaTime;
+                  Dash();
+               }
+               else
+               {
+                  dashing = false;
+                  tempDashTime = dashTime;
+               }
+            }
+        }
+    
+  
+    private void Dash()
+    {
+        if (facingRight)
+        {
+            rb.velocity = new Vector2(dashSpeed, rb.velocity.y);
+        }
+        else
+        {
+            rb.velocity = new Vector2(-dashSpeed, rb.velocity.y);
         }
     }
-  
+
     private void Jump()
     {
         if(isGrounded || jumpCount < 2)
