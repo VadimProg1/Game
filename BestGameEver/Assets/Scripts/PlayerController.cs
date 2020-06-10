@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
    
     private int jumpCount;
 
-    private bool facingRight = true;
+    public bool facingRight = true;
     public float dashTime;
     private float tempDashTime;
     public bool dashing;
@@ -28,11 +28,14 @@ public class PlayerController : MonoBehaviour
     public float dashTimeCooldown;
     private float  tempDashTimeCooldown;
 
+    Object bulletRef;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         tempDashTime = dashTime;
         tempDashTimeCooldown = dashTimeCooldown;
+        bulletRef = Resources.Load("Bullet");
     }
 
     private void FixedUpdate()
@@ -55,6 +58,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        //Dashing
         if (Input.GetKeyDown(KeyCode.F) && tempDashTimeCooldown <= 0)
         {
             tempDashTimeCooldown = dashTimeCooldown;
@@ -63,27 +67,41 @@ public class PlayerController : MonoBehaviour
 
         if (!dashing)
         {
+            //Jumping
             if (Input.GetKeyDown(KeyCode.W))
             {
                 Jump();
+            }
+            //Shooting
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                GameObject bul = (GameObject)Instantiate(bulletRef);
+                if (facingRight)
+                {                
+                    bul.transform.position = new Vector2(transform.position.x + 1f, transform.position.y + .2f);
+                }
+                else
+                {
+                    bul.transform.position = new Vector2(transform.position.x - 1f, transform.position.y - .2f);
+                }
             }
 
             tempDashTimeCooldown -= Time.deltaTime;
         }
         else
         {
-               if (tempDashTime > 0)
-               {
-                  tempDashTime -= Time.deltaTime;
-                  Dash();
-               }
-               else
-               {
-                  dashing = false;
-                  tempDashTime = dashTime;
-               }
+            if (tempDashTime > 0)
+            {
+                tempDashTime -= Time.deltaTime;
+                Dash();
+            }
+            else
+            {
+               dashing = false;
+               tempDashTime = dashTime;
             }
         }
+    }
     
   
     private void Dash()
