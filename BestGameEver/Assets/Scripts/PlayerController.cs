@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         tempDashTime = dashTime;
         tempDashTimeCooldown = dashTimeCooldown;
-        bulletRef = Resources.Load("Bullet");
+        bulletRef = Resources.Load("BulletPlayer");
     }
 
     private void FixedUpdate()

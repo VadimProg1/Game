@@ -13,7 +13,8 @@ public class BulletScript : MonoBehaviour
     private float checkTime;
 
     public Transform attackPos;
-    public LayerMask whatIsEnemies;
+    public LayerMask meleeEnemies;
+    public LayerMask rangeEnemies;
 
     GameObject objPlayer;
 
@@ -56,10 +57,15 @@ public class BulletScript : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, whatIsEnemies);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, meleeEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<MeleeEnemy>().TakeDamage(damage);
+                enemiesToDamage[i].GetComponent<MeleeEnemy>().TakeDamage(damage);            
+            }
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, rangeEnemies);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<RangeEnemy>().TakeDamage(damage);
             }
             DestroyBullet();
             checkDestroy = false;

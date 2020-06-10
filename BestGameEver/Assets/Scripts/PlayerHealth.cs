@@ -8,11 +8,6 @@ public class PlayerHealth : MonoBehaviour
     public int health;
     public int indexOfSceneToRespawn;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if(health <= 0)

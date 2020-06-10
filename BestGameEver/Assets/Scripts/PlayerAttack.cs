@@ -8,7 +8,8 @@ public class PlayerAttackMelee : MonoBehaviour
     private float timeAttack;
     public float startTimeAttack;
     public Transform attackPos;
-    public LayerMask whatIsEnemies;
+    public LayerMask meleeEnemies;
+    public LayerMask rangeEnemies;
     public float attackRange;
     public int damage;
 
@@ -18,11 +19,17 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) || GetComponent<PlayerController>().dashing)
             {
-                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, whatIsEnemies);
-                for(int i = 0; i < enemiesToDamage.Length; i++)
+                Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, meleeEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     enemiesToDamage[i].GetComponent<MeleeEnemy>().TakeDamage(damage);
                 }
+                
+                enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, rangeEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<RangeEnemy>().TakeDamage(damage);
+                }               
             }
             timeAttack = startTimeAttack;
         }

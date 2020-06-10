@@ -222,6 +222,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 2
+  facingRight: 1
   dashTime: 0.3
   dashing: 0
   dashSpeed: 30
@@ -254,9 +255,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimeAttack: 0.1
   attackPos: {fileID: 8625914645457018477}
-  whatIsEnemies:
+  meleeEnemies:
     serializedVersion: 2
     m_Bits: 256
+  rangeEnemies:
+    serializedVersion: 2
+    m_Bits: 1024
   attackRange: 2.06
   damage: 1
 --- !u!1 &8625914647562789884
