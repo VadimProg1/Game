@@ -3993,7 +3993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.59, y: 3.03, z: -10}
+  m_LocalPosition: {x: -6.59, y: 3.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15716,7 +15716,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1063056562}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.61, y: 2.11, z: -2.8952415}
+  m_LocalPosition: {x: -6.6, y: 2.3, z: -2.8952415}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 1070379693}
@@ -15762,12 +15762,12 @@ SpriteRenderer:
   m_SortingLayerID: -838389909
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9506680aae3a464448313adbf71c280c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a65929915c75000468fd878b3a133905, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.33, y: 0.32}
+  m_Size: {x: 0.35, y: 0.41}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -15784,8 +15784,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 1
-  m_Mass: 82.493164
+  m_UseAutoMass: 0
+  m_Mass: 0.8
   m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 2
@@ -15807,18 +15807,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.059144497, y: -0.28916103}
+  m_Offset: {x: -0.0045442954, y: 0.0011201054}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 0.35, y: 0.41}
-    newSize: {x: 0.33, y: 0.32}
+    newSize: {x: 0.35, y: 0.41}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3102503, y: 1.2848951}
+  m_Size: {x: 0.20917352, y: 0.35629633}
   m_EdgeRadius: 0
 --- !u!114 &1063056567
 MonoBehaviour:
@@ -15850,8 +15850,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.49825096, y: -1.0385642}
-  - {x: 0.40811157, y: -1.0385642}
+  - {x: -0.06775903, y: -0.18059175}
+  - {x: 0.06504413, y: -0.18059175}
 --- !u!114 &1063056569
 MonoBehaviour:
   m_ObjectHideFlags: 0
