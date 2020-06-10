@@ -10,6 +10,7 @@ public class PlayerAttackMelee : MonoBehaviour
     public Transform attackPos;
     public LayerMask meleeEnemies;
     public LayerMask rangeEnemies;
+    public LayerMask turretEnemies;
     public float attackRange;
     public int damage;
 
@@ -29,7 +30,12 @@ public class PlayerAttackMelee : MonoBehaviour
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     enemiesToDamage[i].GetComponent<RangeEnemy>().TakeDamage(damage);
-                }               
+                }
+                enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, turretEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<TurretEnemy>().TakeDamage(damage);
+                }
             }
             timeAttack = startTimeAttack;
         }

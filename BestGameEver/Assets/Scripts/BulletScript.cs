@@ -15,6 +15,7 @@ public class BulletScript : MonoBehaviour
     public Transform attackPos;
     public LayerMask meleeEnemies;
     public LayerMask rangeEnemies;
+    public LayerMask turretEnemies;
 
     GameObject objPlayer;
 
@@ -24,7 +25,6 @@ public class BulletScript : MonoBehaviour
         objPlayer = GameObject.FindGameObjectWithTag("Player");
         checkTime = timeToDestroy;
     }
-
 
     void FixedUpdate()
     {
@@ -66,6 +66,11 @@ public class BulletScript : MonoBehaviour
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<RangeEnemy>().TakeDamage(damage);
+            }          
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, turretEnemies);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<TurretEnemy>().TakeDamage(damage);
             }
             DestroyBullet();
             checkDestroy = false;
