@@ -29076,6 +29076,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: cyber-demon 1 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8234147719419954563, guid: 854c6c7b636541d4e8e70a3c2c0dd413,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9fd01b81d0ac714baafbe997cd378d8,
+        type: 3}
+    - target: {fileID: 8234147719419954563, guid: 854c6c7b636541d4e8e70a3c2c0dd413,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8234147719419954564, guid: 854c6c7b636541d4e8e70a3c2c0dd413,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29193,7 +29204,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3125, y: 1.3125}
+    oldSize: {x: 0.16, y: 0.16}
     newSize: {x: 1.3125, y: 1.3125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -29241,7 +29252,7 @@ SpriteRenderer:
   m_SortingLayerID: -838389909
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 06c04197e6f394ba897942f561e896c1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ff396f937dd2e4a49881169623e88f86, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -29259,13 +29270,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1839819962}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.24192187, w: 0.9702957}
   m_LocalPosition: {x: -20.76, y: 11.89, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 28}
 --- !u!1 &1857237471
 GameObject:
   m_ObjectHideFlags: 0
@@ -29537,6 +29548,17 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 505287626574879397, guid: 339f389e5053c274f92875f5bfd7bb25,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 578d7462399663f4a927d7fb86c079ae,
+        type: 3}
+    - target: {fileID: 505287626574879397, guid: 339f389e5053c274f92875f5bfd7bb25,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 505287626574879398, guid: 339f389e5053c274f92875f5bfd7bb25,
         type: 3}
       propertyPath: PlayerPos
@@ -29690,6 +29712,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 752155724}
     m_Modifications:
+    - target: {fileID: 5128912667157045760, guid: 671c3d855be624d4bbaa40e558e92463,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a9632fcff79ddc641bddd63e63286a1b,
+        type: 3}
+    - target: {fileID: 5128912667157045760, guid: 671c3d855be624d4bbaa40e558e92463,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5128912667157045761, guid: 671c3d855be624d4bbaa40e558e92463,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29773,6 +29806,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: cyber-demon 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234147719419954563, guid: 854c6c7b636541d4e8e70a3c2c0dd413,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9fd01b81d0ac714baafbe997cd378d8,
+        type: 3}
+    - target: {fileID: 8234147719419954563, guid: 854c6c7b636541d4e8e70a3c2c0dd413,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8234147719419954564, guid: 854c6c7b636541d4e8e70a3c2c0dd413,
         type: 3}
@@ -30012,6 +30056,27 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8625914645639927159, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e1988475f25eeff4eace11eb82150abc,
+        type: 3}
+    - target: {fileID: 8625914645639927159, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 8625914645639927159, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 8625914645639927159, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8625914645639927161, guid: 4b98ba0c21a70c24c90f31623a83cea5,
         type: 3}

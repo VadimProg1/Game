@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 8234147719419954566}
   - component: {fileID: 8234147719419954681}
   m_Layer: 8
-  m_Name: cyber-demon 1
+  m_Name: MeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ SpriteRenderer:
   m_Size: {x: 0.45, y: 0.58}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!50 &8234147719419954680
