@@ -20,6 +20,7 @@ public class PlayerAttackMelee : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space) || GetComponent<PlayerController>().dashing)
             {
+                SoundManagerScript.PlaySound("playerHit");
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, meleeEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {

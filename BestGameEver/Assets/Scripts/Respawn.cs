@@ -10,6 +10,7 @@ public class Respawn : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
+            SoundManagerScript.PlaySound("playerDeath");
             other.transform.position = spawnPoint.position;
         }
     }

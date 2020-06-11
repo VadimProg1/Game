@@ -8,6 +8,11 @@ public class PlayerHealth : MonoBehaviour
     public int health;
     public int indexOfSceneToRespawn;
 
+    void Start()
+    {
+        
+    }
+
     void Update()
     {
         if(health <= 0)
@@ -18,6 +23,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        SoundManagerScript.PlaySound("takenDamage");
         health -= damage;
         Debug.Log("Player taken Damage");
     }

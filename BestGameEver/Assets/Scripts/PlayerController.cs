@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public float dashSpeed;
     public float dashTimeCooldown;
     private float  tempDashTimeCooldown;
+    private float walkSoundTime = 0.3f;
+    private float tempWalkSoundTime = 0.4f;
 
     Object bulletRef;
 
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
         tempDashTime = dashTime;
         tempDashTimeCooldown = dashTimeCooldown;
         bulletRef = Resources.Load("BulletPlayer");
+        SoundManagerScript.PlaySound("hardBass");
     }
 
     private void FixedUpdate()
@@ -48,6 +51,13 @@ public class PlayerController : MonoBehaviour
                 jumpCount = 1;
             }
             moveInput = Input.GetAxis("Horizontal");
+            tempWalkSoundTime -= Time.deltaTime;
+            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && tempWalkSoundTime <= 0)
+            {
+                SoundManagerScript.PlaySound("playerWalk");
+                tempWalkSoundTime = walkSoundTime;
+            }             
+            
             rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
             if ((!facingRight && moveInput > 0) || (facingRight && moveInput < 0))
             {
@@ -70,11 +80,13 @@ public class PlayerController : MonoBehaviour
             //Jumping
             if (Input.GetKeyDown(KeyCode.W))
             {
+                SoundManagerScript.PlaySound("jump");
                 Jump();
             }
             //Shooting
             if (Input.GetKeyDown(KeyCode.X))
             {
+                SoundManagerScript.PlaySound("playerFire");
                 GameObject bul = (GameObject)Instantiate(bulletRef);
                 if (facingRight)
                 {                

@@ -37,6 +37,7 @@ public class RangeEnemy : MonoBehaviour
     {
         if (health <= 0)
         {
+            SoundManagerScript.PlaySound("enemyDeath");
             Destroy(gameObject);
         }
 
