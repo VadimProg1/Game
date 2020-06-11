@@ -29200,7 +29200,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.011768207, y: -0.009465259}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -29211,7 +29211,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3125, y: 1.3125}
+  m_Size: {x: 0.122148514, y: 0.1332038}
   m_EdgeRadius: 0
 --- !u!212 &1839819965
 SpriteRenderer:
@@ -29309,18 +29309,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0077888966, y: -0.039683998}
+  m_Offset: {x: 0.0044745207, y: 0.015501142}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.2, y: 3.3}
+    oldSize: {x: 0.22, y: 0.33}
     newSize: {x: 2.2, y: 3.3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.0370612, y: 3.1950712}
+  m_Size: {x: 0.2343396, y: 0.34995866}
   m_EdgeRadius: 0
 --- !u!4 &1857237473
 Transform:
@@ -29330,8 +29330,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1857237471}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.93, y: 12.67, z: 0}
-  m_LocalScale: {x: 0.93169546, y: 0.9924105, z: 1}
+  m_LocalPosition: {x: -5.89, y: 12.35, z: 0}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -29390,7 +29390,7 @@ SpriteRenderer:
   m_SortingLayerID: -838389909
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8a26d60fb45014bcd9bb392106f7c98b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a7681c12a63eac148b050d52d767d453, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -29702,6 +29702,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BulletEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477907513370838443, guid: 1428a36aa74d9114d959be2f7a4059c6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8477907513370838443, guid: 1428a36aa74d9114d959be2f7a4059c6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1428a36aa74d9114d959be2f7a4059c6, type: 3}

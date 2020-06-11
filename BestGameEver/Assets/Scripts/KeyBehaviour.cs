@@ -19,6 +19,7 @@ public class KeyBehaviour : MonoBehaviour
         {
             collected = true;
             obj.GetComponent<MovingToNextScene>().collectedPasses += 1;
+            Destroy(gameObject);
         }
     }
 }
