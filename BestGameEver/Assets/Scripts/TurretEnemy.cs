@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TurretEnemy : MonoBehaviour
 {
-    public int health;
+    public int maxHealth;
+    private int health;
     public int damage;
 
     public Transform attackPos;
@@ -31,11 +32,16 @@ public class TurretEnemy : MonoBehaviour
     private bool facingRight;
     private bool checkPlayerPosition;
 
+    public Transform bar;
+    private bool healthBarCheck;
+    [SerializeField] private HealthBarScript healthBar;
+
     Object bulletRef;
     GameObject obj;
 
     void Start()
     {
+        health = maxHealth;
         obj = GameObject.FindGameObjectWithTag("Player");
         bulletRef = Resources.Load("BulletEnemy");
     }
@@ -110,17 +116,31 @@ public class TurretEnemy : MonoBehaviour
         }
     }
 
+    public float GetHealthPercent()
+    {
+        return (float)health / (float)maxHealth;        
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
         Debug.Log("Damage taken");
+        healthBar.SetSize(GetHealthPercent());
     }
 
     private void Flip()
     {
+        healthBarCheck = facingRight;
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+
+        if ((healthBarCheck && !facingRight) || (!healthBarCheck && facingRight))
+        {
+            Scaler = bar.localScale;
+            Scaler.x *= -1;
+            bar.localScale = Scaler;
+        }
     }
 }

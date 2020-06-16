@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class MeleeEnemy : MonoBehaviour
 {
-    public int health;
+    public int maxHealth;
+    private int health;
     public int damage;
 
     public Transform attackPos;
@@ -24,12 +25,16 @@ public class MeleeEnemy : MonoBehaviour
     public bool SeePlayer;
     private bool facingRight;
 
+    public Transform bar;
+    private bool healthBarCheck;
+    [SerializeField] private HealthBarScript healthBar;
+
     GameObject obj;
 
     void Start()
     {
         obj = GameObject.FindGameObjectWithTag("Player");
-
+        health = maxHealth;
     }
 
     void Update()
@@ -82,17 +87,30 @@ public class MeleeEnemy : MonoBehaviour
         }
     }
 
+    public float GetHealthPercent()
+    {
+        return (float)health / (float)maxHealth;
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
         Debug.Log("Damage taken");
+        healthBar.SetSize(GetHealthPercent());
     }
 
     private void Flip()
     {
+        healthBarCheck = facingRight;
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+        if ((healthBarCheck && !facingRight) || (!healthBarCheck && facingRight))
+        {
+            Scaler = bar.localScale;
+            Scaler.x *= -1;
+            bar.localScale = Scaler;
+        }
     }
 }
