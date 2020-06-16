@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
             }
             moveInput = Input.GetAxis("Horizontal");            
             tempWalkSoundTime -= Time.deltaTime;
-            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && tempWalkSoundTime <= 0)
+            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && tempWalkSoundTime <= 0 && isGrounded)
             {
                 SoundManagerScript.PlaySound("playerWalk");
                 tempWalkSoundTime = walkSoundTime;
@@ -66,8 +66,7 @@ public class PlayerController : MonoBehaviour
             if ((!facingRight && moveInput > 0) || (facingRight && moveInput < 0))
             {
                 Flip();
-            }          
-            
+            }                      
         }
     }
 
@@ -84,8 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             //Jumping
             if (Input.GetKeyDown(KeyCode.W))
-            {
-                SoundManagerScript.PlaySound("jump");
+            {                            
                 Jump();
             }
             //Shooting
@@ -136,13 +134,15 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         if(isGrounded || jumpCount < 2)
-        {           
+        {
+            SoundManagerScript.PlaySound("jump");
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpForce;
             isGrounded = false;
             jumpCount++;
         }
         else if(!isGrounded && jumpCount == 1)
         {
+            SoundManagerScript.PlaySound("jump");
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpForce;
             jumpCount++;
         }
