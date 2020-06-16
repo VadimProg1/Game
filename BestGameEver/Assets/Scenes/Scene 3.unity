@@ -122760,13 +122760,13 @@ PrefabInstance:
     - target: {fileID: 8625914645639927158, guid: 4b98ba0c21a70c24c90f31623a83cea5,
         type: 3}
       propertyPath: m_GravityScale
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8625914645639927159, guid: 4b98ba0c21a70c24c90f31623a83cea5,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1988475f25eeff4eace11eb82150abc,
+      objectReference: {fileID: 21300000, guid: 37303a302ac4c15469a6b31ab455aa8b,
         type: 3}
     - target: {fileID: 8625914645639927159, guid: 4b98ba0c21a70c24c90f31623a83cea5,
         type: 3}

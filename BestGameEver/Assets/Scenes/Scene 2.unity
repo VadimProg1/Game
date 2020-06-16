@@ -322,6 +322,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: turret (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5128912667157045762, guid: 671c3d855be624d4bbaa40e558e92463,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5128912667157045766, guid: 671c3d855be624d4bbaa40e558e92463,
         type: 3}
       propertyPath: PlayerPos

@@ -16,6 +16,7 @@ public class BulletScript : MonoBehaviour
     public LayerMask meleeEnemies;
     public LayerMask rangeEnemies;
     public LayerMask turretEnemies;
+    public LayerMask bossEnemy;
 
     GameObject objPlayer;
 
@@ -71,6 +72,11 @@ public class BulletScript : MonoBehaviour
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<TurretEnemy>().TakeDamage(damage);
+            }
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, bossEnemy);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<BossScript>().TakeDamage(damage);
             }
             DestroyBullet();
             checkDestroy = false;

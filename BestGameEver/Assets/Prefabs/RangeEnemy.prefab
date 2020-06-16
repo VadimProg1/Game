@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: -838389909
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 47b0dd55915ed9b4aa0712ea6babc889, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b0e5fdf42d4ca2647bd0fb3b3bf3e526, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 062258ef9ea5ce54a8c96b7df080c9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  damage: 0
+  health: 1
+  damage: 1
   attackPos: {fileID: 505287626574879395}
   PlayerPos: {fileID: 0}
   whatIsEnemies:

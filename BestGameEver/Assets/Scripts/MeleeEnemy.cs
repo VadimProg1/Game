@@ -29,6 +29,7 @@ public class MeleeEnemy : MonoBehaviour
     void Start()
     {
         obj = GameObject.FindGameObjectWithTag("Player");
+
     }
 
     void Update()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class PlayerAttackMelee : MonoBehaviour
+public class PlayerAttack : MonoBehaviour
 {
     private float timeAttack;
     public float startTimeAttack;
@@ -11,6 +11,7 @@ public class PlayerAttackMelee : MonoBehaviour
     public LayerMask meleeEnemies;
     public LayerMask rangeEnemies;
     public LayerMask turretEnemies;
+    public LayerMask bossEnemy;
     public float attackRange;
     public int damage;
 
@@ -36,6 +37,11 @@ public class PlayerAttackMelee : MonoBehaviour
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     enemiesToDamage[i].GetComponent<TurretEnemy>().TakeDamage(damage);
+                }
+                enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, bossEnemy);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<BossScript>().TakeDamage(damage);
                 }
             }
             timeAttack = startTimeAttack;

@@ -14,10 +14,11 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     private bool isGrounded;
+    private bool standingOnEnemy;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
-   
+
     private int jumpCount;
 
     public bool facingRight = true;
@@ -29,6 +30,9 @@ public class PlayerController : MonoBehaviour
     private float  tempDashTimeCooldown;
     private float walkSoundTime = 0.3f;
     private float tempWalkSoundTime = 0.4f;
+    public bool isOnHead;
+    private Transform bar;
+    private bool healthBarCheck;
 
     Object bulletRef;
 
@@ -38,7 +42,7 @@ public class PlayerController : MonoBehaviour
         tempDashTime = dashTime;
         tempDashTimeCooldown = dashTimeCooldown;
         bulletRef = Resources.Load("BulletPlayer");
-        SoundManagerScript.PlaySound("hardBass");
+        bar = transform.Find("HealthBar");
     }
 
     private void FixedUpdate()
@@ -50,7 +54,7 @@ public class PlayerController : MonoBehaviour
             {
                 jumpCount = 1;
             }
-            moveInput = Input.GetAxis("Horizontal");
+            moveInput = Input.GetAxis("Horizontal");            
             tempWalkSoundTime -= Time.deltaTime;
             if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && tempWalkSoundTime <= 0)
             {
@@ -62,7 +66,8 @@ public class PlayerController : MonoBehaviour
             if ((!facingRight && moveInput > 0) || (facingRight && moveInput < 0))
             {
                 Flip();
-            }
+            }          
+            
         }
     }
 
@@ -145,9 +150,16 @@ public class PlayerController : MonoBehaviour
 
     void Flip()
     {
+        healthBarCheck = facingRight;
         facingRight = !facingRight;
         Vector3 Scaler = transform.localScale;
         Scaler.x *= -1;
         transform.localScale = Scaler;
+        if ((healthBarCheck && !facingRight) || (!healthBarCheck && facingRight))
+        {
+            Scaler = bar.localScale;
+            Scaler.x *= -1;
+            bar.localScale = Scaler;
+        }       
     }
 }

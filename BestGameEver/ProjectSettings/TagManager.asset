@@ -8,6 +8,7 @@ TagManager:
   - Door1
   - Ground
   - Enemy
+  - Enemy's head
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - Player
   - RangeEnemy
   - TurretEnemy
-  - 
-  - 
+  - BossEnemy
+  - Enemy's head
   - 
   - 
   - 
