@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         {
             //Jumping
             if (Input.GetKeyDown(KeyCode.W))
-            {                            
+            {
                 Jump();
             }
             //Shooting

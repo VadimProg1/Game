@@ -21,7 +21,7 @@ public class PlayerAttack : MonoBehaviour
         if(timeAttack <= 0 || GetComponent<PlayerController>().dashing)
         {
             if (Input.GetKey(KeyCode.Space) || GetComponent<PlayerController>().dashing)
-            {
+            {               
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, meleeEnemies);
                 hitCheck = Physics2D.OverlapCircle(attackPos.position, attackRange, meleeEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
@@ -30,7 +30,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
-                    SoundManagerScript.PlaySound("playerHit");
+                    SoundManagerScript.PlaySound("playerHit");                    
                 }
 
                 enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, rangeEnemies);

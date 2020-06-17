@@ -36,25 +36,29 @@ public class TurretEnemy : MonoBehaviour
     private bool healthBarCheck;
     [SerializeField] private HealthBarScript healthBar;
 
+    private Material matWhite;
+    private Material matDefault;
+    private UnityEngine.Object explosionRef;
+    SpriteRenderer sr;
+
     Object bulletRef;
     GameObject obj;
 
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+        matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        matDefault = sr.material;
+        explosionRef = Resources.Load("Explosion");
         health = maxHealth;
         obj = GameObject.FindGameObjectWithTag("Player");
         bulletRef = Resources.Load("BulletEnemy");
     }
 
     void Update()
-    {
-        if (health <= 0)
-        {
-            SoundManagerScript.PlaySound("enemyDeath");
-            Destroy(gameObject);
-        }
-
+    {     
         SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
+
         if (SeePlayer)
         {
             if (timeAttackCheck)
@@ -126,6 +130,23 @@ public class TurretEnemy : MonoBehaviour
         health -= damage;
         Debug.Log("Damage taken");
         healthBar.SetSize(GetHealthPercent());
+        sr.material = matWhite;
+        if (health <= 0)
+        {
+            GameObject explosion = (GameObject)Instantiate(explosionRef);
+            explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            SoundManagerScript.PlaySound("enemyDeath");
+            Destroy(gameObject);
+        }
+        else
+        {
+            Invoke("ResetMaterial", .1f);
+        }
+    }
+
+    void ResetMaterial()
+    {
+        sr.material = matDefault;
     }
 
     private void Flip()

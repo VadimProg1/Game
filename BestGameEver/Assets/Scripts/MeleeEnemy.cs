@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
@@ -29,22 +30,25 @@ public class MeleeEnemy : MonoBehaviour
     private bool healthBarCheck;
     [SerializeField] private HealthBarScript healthBar;
 
+    private Material matWhite;
+    private Material matDefault;
+    private UnityEngine.Object explosionRef;
+    SpriteRenderer sr;
+
     GameObject obj;
 
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+        matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        matDefault = sr.material;
+        explosionRef = Resources.Load("Explosion");
         obj = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
     }
 
     void Update()
-    {
-        if(health <= 0)
-        {
-            SoundManagerScript.PlaySound("enemyDeath");
-            Destroy(gameObject);
-        }
-
+    {       
         SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
         if (SeePlayer)
         {
@@ -96,7 +100,24 @@ public class MeleeEnemy : MonoBehaviour
     {
         health -= damage;
         Debug.Log("Damage taken");
+        sr.material = matWhite;
+        if (health <= 0)
+        {
+            SoundManagerScript.PlaySound("enemyDeath");
+            GameObject explosion = (GameObject)Instantiate(explosionRef);
+            explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            Destroy(gameObject);
+        }
+        else
+        {
+            Invoke("ResetMaterial", .1f);
+        }
         healthBar.SetSize(GetHealthPercent());
+    }
+
+    void ResetMaterial()
+    {
+        sr.material = matDefault;
     }
 
     private void Flip()

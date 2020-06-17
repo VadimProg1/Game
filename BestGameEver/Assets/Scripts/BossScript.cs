@@ -42,7 +42,11 @@ public class BossScript : MonoBehaviour
     private bool secondFly = false;
     public Transform bar;
     private bool healthBarCheck;
-    [SerializeField] private HealthBarScript healthBar;  
+    [SerializeField] private HealthBarScript healthBar;
+
+    private Material matWhite;
+    private Material matDefault;
+    SpriteRenderer sr;
 
     Rigidbody2D rb;
     Object bulletRef;
@@ -50,6 +54,9 @@ public class BossScript : MonoBehaviour
 
     void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+        matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        matDefault = sr.material;
         rb = GetComponent<Rigidbody2D>();
         obj = GameObject.FindGameObjectWithTag("Player");
         bulletRef = Resources.Load("BulletEnemy");
@@ -64,13 +71,7 @@ public class BossScript : MonoBehaviour
 
    
     void FixedUpdate()
-    {
-        if (health <= 0)
-        {
-            SoundManagerScript.PlaySound("enemyDeath");
-            Destroy(gameObject);
-        }
-
+    {       
         if ((PlayerPos.position.x == attackPos.position.x) && (obj.GetComponent<PlayerController>().moveInput == 0))
         {
             Debug.Log("dsfsdf");
@@ -267,6 +268,21 @@ public class BossScript : MonoBehaviour
         health -= damage;
         Debug.Log("Damage taken");
         healthBar.SetSize(GetHealthPercent());
+        sr.material = matWhite;
+        if (health <= 0)
+        {
+            SoundManagerScript.PlaySound("enemyDeath");
+            Destroy(gameObject);
+        }
+        else
+        {
+            Invoke("ResetMaterial", .1f);
+        }
+    }
+
+    void ResetMaterial()
+    {
+        sr.material = matDefault;
     }
 
     private void Flip()

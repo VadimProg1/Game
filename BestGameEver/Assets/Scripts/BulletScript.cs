@@ -58,22 +58,22 @@ public class BulletScript : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, meleeEnemies);
+            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1, meleeEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<MeleeEnemy>().TakeDamage(damage);            
             }
-            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, rangeEnemies);
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1, rangeEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<RangeEnemy>().TakeDamage(damage);
             }          
-            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, turretEnemies);
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1, turretEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<TurretEnemy>().TakeDamage(damage);
             }
-            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 3, bossEnemy);
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1, bossEnemy);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<BossScript>().TakeDamage(damage);

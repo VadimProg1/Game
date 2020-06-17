@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Enemy
   - Enemy's head
+  - Shaker
   layers:
   - Default
   - TransparentFX
