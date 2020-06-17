@@ -30035,6 +30035,7 @@ GameObject:
   - component: {fileID: 1020423622}
   - component: {fileID: 1020423624}
   - component: {fileID: 1020423623}
+  - component: {fileID: 1020423625}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -30109,6 +30110,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1020423625
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020423621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 1
+  m_FrequencyGain: 1
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!4 &1063056563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8625914645639927152, guid: 4b98ba0c21a70c24c90f31623a83cea5,
@@ -30421,9 +30439,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1566785881}
   - component: {fileID: 1566785880}
+  - component: {fileID: 1566785882}
   m_Layer: 0
-  m_Name: CM vcam1
-  m_TagString: Untagged
+  m_Name: Cinemachine
+  m_TagString: Shaker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30470,7 +30489,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566785879}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.92, y: -2.03, z: -12.895242}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -30478,6 +30497,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1566785882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566785879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70cd2bc5f2a3a8c4dbae8b7821ba49a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeDuration: 0.3
+  ShakeAmplitude: 1.2
+  ShakeFrequency: 2
+  VirtualCamera: {fileID: 1566785880}
 --- !u!4 &1610102708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8234147719419954564, guid: 854c6c7b636541d4e8e70a3c2c0dd413,

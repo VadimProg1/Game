@@ -16,6 +16,13 @@ public class PlayerAttack : MonoBehaviour
     public int damage;
     private bool hitCheck;
 
+    GameObject objShake;
+
+    void Start()
+    {
+        objShake = GameObject.FindGameObjectWithTag("Shaker");
+    }
+
     void Update()
     {
         if(timeAttack <= 0 || GetComponent<PlayerController>().dashing)
@@ -30,6 +37,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");                    
                 }
 
@@ -41,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");
                 }
 
@@ -52,6 +61,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");
                 }
 
@@ -63,6 +73,7 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");
                 }
             }
