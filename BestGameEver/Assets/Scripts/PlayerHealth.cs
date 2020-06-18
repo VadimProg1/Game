@@ -40,4 +40,10 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("Player taken Damage");
         healthBar.SetSize(GetHealthPercent());
     }
+
+    public void TakeHeal(int heal)
+    {
+        health += heal;
+        healthBar.SetSize(GetHealthPercent());
+    }
 }

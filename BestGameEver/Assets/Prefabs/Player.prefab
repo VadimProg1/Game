@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 289151417
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2fb24553d96cc7041857c4bdc35724d4, type: 3}
   m_Color: {r: 0.1448469, g: 0.8773585, b: 0.15357947, a: 1}
   m_FlipX: 0
@@ -231,7 +231,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 289151417
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2fb24553d96cc7041857c4bdc35724d4, type: 3}
   m_Color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
   m_FlipX: 0
@@ -320,6 +320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9902026006b9674798d51c8a1966f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 1400762746}
+  border: {fileID: 1295053095}
+  barSprite: {fileID: 928265294}
+  Player: 1
 --- !u!1 &8625914645457018478
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +554,9 @@ MonoBehaviour:
   dashing: 0
   dashSpeed: 20
   dashTimeCooldown: 1
+  shootingCooldown: 0.5
   isOnHead: 0
+  dashHit: 0
 --- !u!114 &1772704132637775428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,7 +569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3871dfe2a77dfff4b9d9d82f886d34fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeAttack: 1
+  startTimeAttack: 0.5
   attackPos: {fileID: 8625914645639927152}
   meleeEnemies:
     serializedVersion: 2

@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 289151417
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 2fb24553d96cc7041857c4bdc35724d4, type: 3}
   m_Color: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
   m_FlipX: 0
@@ -127,6 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9902026006b9674798d51c8a1966f1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 908846186}
+  border: {fileID: 1654226507}
+  barSprite: {fileID: 1737150550}
 --- !u!1 &1471091950
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +311,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 289151417
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2fb24553d96cc7041857c4bdc35724d4, type: 3}
   m_Color: {r: 0.9245283, g: 0.27679238, b: 0.11774653, a: 1}
   m_FlipX: 0
@@ -418,7 +421,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 10
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 2

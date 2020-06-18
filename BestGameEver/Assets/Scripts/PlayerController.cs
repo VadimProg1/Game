@@ -27,22 +27,32 @@ public class PlayerController : MonoBehaviour
     public bool dashing;
     public float dashSpeed;
     public float dashTimeCooldown;
+    public float shootingCooldown;
+    private float tempShootingCooldown;
     private float  tempDashTimeCooldown;
     private float walkSoundTime = 0.3f;
     private float tempWalkSoundTime = 0.4f;
     public bool isOnHead;
+    public bool dashHit = false;
     private Transform bar;
     private bool healthBarCheck;
+    private TrailRenderer trail;
+
+    GameObject objShake;
 
     Object bulletRef;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        trail = GetComponent<TrailRenderer>();
+        trail.enabled = false;
         tempDashTime = dashTime;
         tempDashTimeCooldown = dashTimeCooldown;
         bulletRef = Resources.Load("BulletPlayer");
         bar = transform.Find("HealthBar");
+        objShake = GameObject.FindGameObjectWithTag("Shaker");
+        tempShootingCooldown = shootingCooldown;
     }
 
     private void FixedUpdate()
@@ -75,6 +85,8 @@ public class PlayerController : MonoBehaviour
         //Dashing
         if (Input.GetKeyDown(KeyCode.F) && tempDashTimeCooldown <= 0)
         {
+            trail.enabled = true;
+            objShake.GetComponent<CameraShakerScript>().Shake();
             tempDashTimeCooldown = dashTimeCooldown;
             dashing = true;
         }
@@ -87,8 +99,10 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
             //Shooting
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X) && tempShootingCooldown <= 0)
             {
+                tempShootingCooldown = shootingCooldown;
+                objShake.GetComponent<CameraShakerScript>().Shake();
                 SoundManagerScript.PlaySound("playerFire");
                 GameObject bul = (GameObject)Instantiate(bulletRef);
                 if (facingRight)
@@ -99,6 +113,10 @@ public class PlayerController : MonoBehaviour
                 {
                     bul.transform.position = new Vector2(transform.position.x - 1f, transform.position.y - .2f);
                 }
+            }
+            else
+            {
+                tempShootingCooldown -= Time.deltaTime;
             }
 
             tempDashTimeCooldown -= Time.deltaTime;
@@ -112,12 +130,18 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-               dashing = false;
-               tempDashTime = dashTime;
-            }
+                dashHit = false;
+                dashing = false;                       
+                tempDashTime = dashTime;
+                Invoke("TrailOff", .3f);
+            }            
         }
     }
     
+    private void TrailOff()
+    {
+        trail.enabled = false;
+    }
   
     private void Dash()
     {

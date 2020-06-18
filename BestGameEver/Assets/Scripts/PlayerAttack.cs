@@ -27,7 +27,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(timeAttack <= 0 || GetComponent<PlayerController>().dashing)
         {
-            if (Input.GetKey(KeyCode.Space) || GetComponent<PlayerController>().dashing)
+            if (Input.GetKey(KeyCode.Space) || (GetComponent<PlayerController>().dashing && GetComponent<PlayerController>().dashHit == false))
             {               
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, meleeEnemies);
                 hitCheck = Physics2D.OverlapCircle(attackPos.position, attackRange, meleeEnemies);
@@ -37,6 +37,10 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    if (GetComponent<PlayerController>().dashing)
+                    {
+                        GetComponent<PlayerController>().dashHit = true;
+                    }
                     objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");                    
                 }
@@ -49,6 +53,10 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    if (GetComponent<PlayerController>().dashing)
+                    {
+                        GetComponent<PlayerController>().dashHit = true;
+                    }
                     objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");
                 }
@@ -61,6 +69,10 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    if (GetComponent<PlayerController>().dashing)
+                    {
+                        GetComponent<PlayerController>().dashHit = true;
+                    }
                     objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");
                 }
@@ -73,6 +85,10 @@ public class PlayerAttack : MonoBehaviour
                 }
                 if (hitCheck)
                 {
+                    if (GetComponent<PlayerController>().dashing)
+                    {
+                        GetComponent<PlayerController>().dashHit = true;
+                    }
                     objShake.GetComponent<CameraShakerScript>().Shake();
                     SoundManagerScript.PlaySound("playerHit");
                 }
