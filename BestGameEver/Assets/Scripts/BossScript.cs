@@ -71,12 +71,7 @@ public class BossScript : MonoBehaviour
 
    
     void FixedUpdate()
-    {       
-        if ((PlayerPos.position.x == attackPos.position.x) && (obj.GetComponent<PlayerController>().moveInput == 0))
-        {
-            Debug.Log("dsfsdf");
-        }
-
+    {              
         if (!stopMainAttacks)
         {
             SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);

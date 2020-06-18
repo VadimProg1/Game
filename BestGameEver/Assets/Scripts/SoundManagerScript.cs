@@ -7,6 +7,7 @@ public class SoundManagerScript : MonoBehaviour
     public static AudioClip playerHitSound, jumpSound, enemyDeathSound, playerWalkSound, fireSound,
         playerDeathSound, playerTakenDamageSound, hardBass;
     static AudioSource audioSrc;
+
     void Start()
     {
         playerHitSound = Resources.Load<AudioClip>("playerHit");
@@ -50,5 +51,5 @@ public class SoundManagerScript : MonoBehaviour
                 audioSrc.PlayOneShot(hardBass);
                 break;
         }
-    }
+    }   
 }

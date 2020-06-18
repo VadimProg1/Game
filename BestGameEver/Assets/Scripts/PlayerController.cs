@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour
             tempDashTimeCooldown = dashTimeCooldown;
             dashing = true;
         }
-
+    
         if (!dashing)
         {
             //Jumping
