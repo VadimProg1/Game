@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class PauseMenuScript : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
-    public AudioMixer audioMixer;
+    public AudioMixer audioMixerSound;
+    public AudioMixer audioMixerMusic;
+
 
     void Update()
     {
@@ -21,7 +24,7 @@ public class PauseMenuScript : MonoBehaviour
             {
                 Pause();
             }
-        }           
+        }       
     }
 
     public void Resume()
@@ -51,6 +54,11 @@ public class PauseMenuScript : MonoBehaviour
 
     public void SetVolume(float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        audioMixerSound.SetFloat("volume", volume);
+    }
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixerMusic.SetFloat("musicVolume", volume);
     }
 }

@@ -130,6 +130,7 @@ MonoBehaviour:
   background: {fileID: 908846186}
   border: {fileID: 1654226507}
   barSprite: {fileID: 1737150550}
+  Player: 0
 --- !u!1 &1471091950
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,8 +447,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.13335052, y: -0.24878712}
-  - {x: 0.16160412, y: -0.25027028}
+  - {x: -0.19341539, y: -0.33738285}
+  - {x: 0.17511874, y: -0.33736432}
 --- !u!114 &100983084842085955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,16 +500,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0070929825, y: 0.0021279156}
+  m_Offset: {x: 0.0070929825, y: -0.041419163}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.45, y: 0.58}
+    oldSize: {x: 0.5, y: 0.75}
     newSize: {x: 0.45, y: 0.58}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.3450241, y: 0.49630278}
+  m_Size: {x: 0.3450241, y: 0.5833969}
   m_EdgeRadius: 0

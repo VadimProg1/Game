@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour
         bar = transform.Find("HealthBar");
         objShake = GameObject.FindGameObjectWithTag("Shaker");
         tempShootingCooldown = shootingCooldown;
+        MusicManagerScript.PlaySound("Music");
+
     }
 
     private void FixedUpdate()
@@ -69,7 +71,7 @@ public class PlayerController : MonoBehaviour
             tempWalkSoundTime -= Time.deltaTime;
             if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && tempWalkSoundTime <= 0 && isGrounded)
             {
-                SoundManagerScript.PlaySound("playerWalk");
+                SoundManagerScript.PlaySound("playerWalk");                
                 tempWalkSoundTime = walkSoundTime;
             }             
             

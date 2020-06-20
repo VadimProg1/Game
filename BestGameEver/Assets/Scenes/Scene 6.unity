@@ -12995,6 +12995,11 @@ PrefabInstance:
       propertyPath: healthMax
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1772704132637775428, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+        type: 3}
+      propertyPath: startDashTimeAttack
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8625914645639927152, guid: 4b98ba0c21a70c24c90f31623a83cea5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13357,6 +13362,11 @@ PrefabInstance:
         type: 3}
       propertyPath: damage
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100983084842085955, guid: a06da0c9f1d6fa844ac0cef14cd84dde,
+        type: 3}
+      propertyPath: maxHealth
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 100983084842085961, guid: a06da0c9f1d6fa844ac0cef14cd84dde,
         type: 3}

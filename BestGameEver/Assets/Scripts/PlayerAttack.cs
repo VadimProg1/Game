@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private float timeAttack;
+    private float dashTimeAttack;
     public float startTimeAttack;
+    public float startDashTimeAttack;
     public Transform attackPos;
     public LayerMask meleeEnemies;
     public LayerMask rangeEnemies;
@@ -27,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if(timeAttack <= 0 || GetComponent<PlayerController>().dashing)
         {
-            if (Input.GetKey(KeyCode.Space) || (GetComponent<PlayerController>().dashing && GetComponent<PlayerController>().dashHit == false))
+            if ((Input.GetKey(KeyCode.Space) && GetComponent<PlayerController>().dashing == false) || (GetComponent<PlayerController>().dashHit == false))
             {               
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, meleeEnemies);
                 hitCheck = Physics2D.OverlapCircle(attackPos.position, attackRange, meleeEnemies);
@@ -93,7 +95,8 @@ public class PlayerAttack : MonoBehaviour
                     SoundManagerScript.PlaySound("playerHit");
                 }
             }
-            timeAttack = startTimeAttack;
+
+            timeAttack = startDashTimeAttack;
         }
         else
         {
