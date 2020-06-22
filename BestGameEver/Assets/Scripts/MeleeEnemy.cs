@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Runtime.Versioning;
 using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
@@ -29,20 +30,23 @@ public class MeleeEnemy : MonoBehaviour
     public Transform bar;
     private bool healthBarCheck;
     [SerializeField] private HealthBarScript healthBar;
-
+    private Transform spawnPosition;
     private Material matWhite;
     private Material matDefault;
     private UnityEngine.Object explosionRef;
+    private UnityEngine.Object meleeEnemyRef;
     SpriteRenderer sr;
 
     GameObject obj;
 
     void Start()
     {
+        spawnPosition = transform;
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
         matDefault = sr.material;
         explosionRef = Resources.Load("Explosion");
+        meleeEnemyRef = Resources.Load("MeleeEnemy");
         obj = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
     }
@@ -59,18 +63,24 @@ public class MeleeEnemy : MonoBehaviour
             
             if (attackPos.position.x < PlayerPos.position.x)
             {
-                transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
-                if (!facingRight)
+                if(Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1.5f)
                 {
-                    Flip();
+                    transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
+                    if (!facingRight)
+                    {
+                        Flip();
+                    }
                 }
             }
             else
             {
-                transform.Translate(Vector2.left * speed * Time.deltaTime);
-                if (facingRight)
+                if (Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1.5f)
                 {
-                    Flip();
+                    transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (facingRight)
+                    {
+                        Flip();
+                    }
                 }
             }
             attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);

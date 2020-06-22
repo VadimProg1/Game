@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,23 +9,20 @@ public class PlayerHealth : MonoBehaviour
     public int health;
     public int indexOfSceneToRespawn;
     [SerializeField] private HealthBarScript healthBar;
+    public Transform spawnPoint;
+    public Transform player;
 
     void Start()
     {
         health = healthMax;
     }
 
-    void Update()
+    public void RespawnPlayer()
     {
-        if(health <= 0)
-        {
-            SceneManager.LoadScene(indexOfSceneToRespawn);
-        }
-        else if(health > healthMax)
-        {
-            health = healthMax;
-        }
-    }  
+        player.position = spawnPoint.position;
+        health = healthMax;
+        healthBar.SetSize(GetHealthPercent());
+    }
 
     public float GetHealthPercent()
     {
@@ -36,14 +32,22 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         SoundManagerScript.PlaySound("takenDamage");
-        health -= damage;
         Debug.Log("Player taken Damage");
         healthBar.SetSize(GetHealthPercent());
+        health -= damage;
+        if (health <= 0)
+        {
+            RespawnPlayer();
+        }       
     }
 
     public void TakeHeal(int heal)
     {
         health += heal;
+        if(health > healthMax)
+        {
+            health = healthMax;
+        }
         healthBar.SetSize(GetHealthPercent());
     }
 }

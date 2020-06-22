@@ -130,6 +130,7 @@ MonoBehaviour:
   background: {fileID: 576665942}
   border: {fileID: 450826766}
   barSprite: {fileID: 1382739434}
+  Player: 0
 --- !u!1 &576665940
 GameObject:
   m_ObjectHideFlags: 0

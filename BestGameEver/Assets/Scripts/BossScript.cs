@@ -33,6 +33,8 @@ public class BossScript : MonoBehaviour
     public bool meleeAttack;
     private bool timeAttackCheck = true;
     public bool SeePlayer;
+    public int secondPeekAttack;
+    public int firstPeekAttack;
     private bool facingRight;
     private bool stopMainAttacks = false;
     private bool peekingAbility = false;
@@ -84,18 +86,24 @@ public class BossScript : MonoBehaviour
 
                 if (attackPos.position.x < PlayerPos.position.x)
                 {
-                    transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
-                    if (!facingRight)
+                    if (Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1f)
                     {
-                        Flip();
+                        transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
+                        if (!facingRight)
+                        {
+                            Flip();
+                        }
                     }
                 }
                 else
                 {
-                    transform.Translate(Vector2.left * speed * Time.deltaTime);
-                    if (facingRight)
+                    if (Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1f)
                     {
-                        Flip();
+                        transform.Translate(Vector2.left * speed * Time.deltaTime);
+                        if (facingRight)
+                        {
+                            Flip();
+                        }
                     }
                 }
                 rangeAttack = Physics2D.OverlapCircle(attackPos.position, rangeAttackRange, whatIsEnemies);
@@ -140,7 +148,7 @@ public class BossScript : MonoBehaviour
                 }
             }
         }
-        if (health <= 5 && !firstFly && tempFlyingSectionTime >= 0)
+        if (health <= firstPeekAttack && !firstFly && tempFlyingSectionTime >= 0)
         {           
             if(tempWaitForFlyAttack >= 0)
             {
@@ -156,7 +164,7 @@ public class BossScript : MonoBehaviour
             }
         }
 
-        if (health <= 2 && !secondFly && tempFlyingSectionTime >= 0)
+        if (health <= secondPeekAttack && !secondFly && tempFlyingSectionTime >= 0)
         {
             peekingAbility = false;
             if (tempWaitForFlyAttack >= 0)
@@ -268,6 +276,7 @@ public class BossScript : MonoBehaviour
         {
             SoundManagerScript.PlaySound("enemyDeath");
             Destroy(gameObject);
+            Application.Quit();
         }
         else
         {

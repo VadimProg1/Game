@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    [SerializeField] Transform spawnPoint;
+    public Transform spawnPoint;
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.CompareTag("Player"))

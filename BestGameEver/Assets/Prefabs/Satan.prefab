@@ -113,7 +113,7 @@ Transform:
   - {fileID: 1654226506}
   - {fileID: 1471091951}
   m_Father: {fileID: 100983084842085964}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1291466538
 MonoBehaviour:
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 100983084842085966}
   - component: {fileID: 100983084842085960}
   - component: {fileID: 100983084842085955}
-  - component: {fileID: 1429862265}
+  - component: {fileID: -334641914555639785}
   m_Layer: 12
   m_Name: Satan
   m_TagString: Enemy
@@ -356,6 +356,7 @@ Transform:
   m_LocalPosition: {x: 2.57, y: -2.13, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
+  - {fileID: 5037784317388116817}
   - {fileID: 1291466537}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -447,8 +448,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.19341539, y: -0.33738285}
-  - {x: 0.17511874, y: -0.33736432}
+  - {x: -0.19975318, y: -0.33068758}
+  - {x: 0.18040104, y: -0.33068824}
 --- !u!114 &100983084842085955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,8 +464,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 15
   damage: 0
-  attackPos: {fileID: 100983084842085964}
-  PlayerPos: {fileID: 0}
+  attackPos: {fileID: 5037784317388116817}
+  PlayerPos: {fileID: 8625914645639927152, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+    type: 3}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 512
@@ -487,8 +489,8 @@ MonoBehaviour:
   SeePlayer: 0
   bar: {fileID: 1291466537}
   healthBar: {fileID: 1291466538}
---- !u!61 &1429862265
-BoxCollider2D:
+--- !u!70 &-334641914555639785
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -500,16 +502,36 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0070929825, y: -0.041419163}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.75}
-    newSize: {x: 0.45, y: 0.58}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3450241, y: 0.5833969}
-  m_EdgeRadius: 0
+  m_Offset: {x: -0.003509215, y: 0.004235438}
+  m_Size: {x: 0.21642822, y: 0.65172875}
+  m_Direction: 0
+--- !u!1 &5183043934241813063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5037784317388116817}
+  m_Layer: 0
+  m_Name: AttackPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5037784317388116817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5183043934241813063}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.043, y: 0.076, z: -2.6977122}
+  m_LocalScale: {x: 0.14285713, y: 0.14285713, z: 1}
+  m_Children: []
+  m_Father: {fileID: 100983084842085964}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -366,12 +366,12 @@ GameObject:
   - component: {fileID: 8625914645639927159}
   - component: {fileID: 8625914645639927158}
   - component: {fileID: 8625914645639927157}
-  - component: {fileID: 8625914645639927163}
   - component: {fileID: 1375383829703935385}
   - component: {fileID: 8625914645639927162}
   - component: {fileID: 1772704132637775428}
   - component: {fileID: 8625914645639927156}
   - component: {fileID: 1350141526}
+  - component: {fileID: 625185304}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -435,7 +435,7 @@ SpriteRenderer:
   m_SortingLayerID: -838389909
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d47d7f67b23416245b896702ffa36b05, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 284d08f2a829d0f499ac41d120e24574, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -480,7 +480,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.001593627, y: 0.0045158416}
+  m_Offset: {x: 0.011720236, y: -0.00020226836}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -491,28 +491,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1536953, y: 0.35054526}
+  m_Size: {x: 0.11231946, y: 0.35998148}
   m_EdgeRadius: 0
---- !u!68 &8625914645639927163
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8625914645639927153}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.07388754, y: -0.17526639}
-  - {x: -0.06528683, y: -0.17526639}
-  - {x: 0.07719555, y: -0.17512706}
-  - {x: 0.0951603, y: -0.1751271}
 --- !u!114 &1375383829703935385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTimeAttack: 0.5
+  startDashTimeAttack: 0.5
   attackPos: {fileID: 8625914645457018477}
   meleeEnemies:
     serializedVersion: 2
@@ -706,6 +687,24 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!68 &625185304
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8625914645639927153}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.06962862, y: -0.182434}
+  - {x: 0.074346736, y: -0.182434}
 --- !u!1 &8625914647562789884
 GameObject:
   m_ObjectHideFlags: 0

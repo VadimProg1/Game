@@ -84,13 +84,13 @@ public class TurretEnemy : MonoBehaviour
 
             if (attack)
             {
-                if (timeAttack <= 0)
+                if (timeAttack <= 0 && PlayerPos.position.y < attackPos.position.y)
                 {
                     GameObject bul = (GameObject)Instantiate(bulletRef);
                     if (facingRight)
                     {
                         bul.transform.position = new Vector2(transform.position.x + 2f, transform.position.y);
-                        playerX = PlayerPos.position.x;
+                        playerX = PlayerPos.position.x - 2f;
                         playerY = PlayerPos.position.y;
                         vecX = playerX - attackPos.position.x;
                         vecY = playerY - attackPos.position.y;
@@ -101,7 +101,7 @@ public class TurretEnemy : MonoBehaviour
                     else
                     {
                         bul.transform.position = new Vector2(transform.position.x - 2f, transform.position.y);
-                        playerX = PlayerPos.position.x;
+                        playerX = PlayerPos.position.x + 2f;
                         playerY = PlayerPos.position.y;
                         vecX = playerX - attackPos.position.x;
                         vecY = playerY - attackPos.position.y;

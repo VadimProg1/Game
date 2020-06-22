@@ -26,11 +26,13 @@ public class PlayerAttack : MonoBehaviour
     }
 
     void Update()
-    {
+    {      
         if(timeAttack <= 0 || GetComponent<PlayerController>().dashing)
         {
-            if ((Input.GetKey(KeyCode.Space) && GetComponent<PlayerController>().dashing == false) || (GetComponent<PlayerController>().dashHit == false))
-            {               
+            
+            if ((Input.GetKey(KeyCode.Space) && GetComponent<PlayerController>().dashing == false) || (GetComponent<PlayerController>().dashHit == false && GetComponent<PlayerController>().dashing))
+            {
+                Debug.Log("Hit");
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, meleeEnemies);
                 hitCheck = Physics2D.OverlapCircle(attackPos.position, attackRange, meleeEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
@@ -95,7 +97,6 @@ public class PlayerAttack : MonoBehaviour
                     SoundManagerScript.PlaySound("playerHit");
                 }
             }
-
             timeAttack = startDashTimeAttack;
         }
         else

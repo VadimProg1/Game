@@ -12,6 +12,7 @@ public class HealthBarScript : MonoBehaviour
     public bool Player;
 
 
+
     private void Start()
     {
         bar = transform.Find("Bar");

@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
         bar = transform.Find("HealthBar");
         objShake = GameObject.FindGameObjectWithTag("Shaker");
         tempShootingCooldown = shootingCooldown;
-        MusicManagerScript.PlaySound("Music");
 
     }
 
