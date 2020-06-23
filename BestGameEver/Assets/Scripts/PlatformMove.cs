@@ -9,7 +9,6 @@ public class PlatformMove : MonoBehaviour
     public Transform pos1, pos2;
     public float speed;
     public Transform startPos;
-
     Vector3 nextPos;
 
     void Start()

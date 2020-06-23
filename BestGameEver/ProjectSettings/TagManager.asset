@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Enemy's head
   - Shaker
+  - Platform
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - BossEnemy
   - Enemy's head
   - FallTrigger
-  - 
+  - Platform
   - 
   - 
   - 

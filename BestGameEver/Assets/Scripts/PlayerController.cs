@@ -187,5 +187,5 @@ public class PlayerController : MonoBehaviour
             Scaler.x *= -1;
             bar.localScale = Scaler;
         }       
-    }
+    }   
 }
