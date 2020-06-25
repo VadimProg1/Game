@@ -53,9 +53,11 @@ public class BossScript : MonoBehaviour
     Rigidbody2D rb;
     Object bulletRef;
     GameObject obj;
+    GameObject objShake;
 
     void Start()
     {
+        objShake = GameObject.FindGameObjectWithTag("Shaker");
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
         matDefault = sr.material;

@@ -11,6 +11,10 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private HealthBarScript healthBar;
     public Transform spawnPoint;
     public Transform player;
+    public LayerMask meleeEnemies;
+    public LayerMask rangeEnemies;
+    public LayerMask turretEnemies;
+    public LayerMask heal;
 
     void Start()
     {
@@ -22,7 +26,29 @@ public class PlayerHealth : MonoBehaviour
         player.position = spawnPoint.position;
         health = healthMax;
         healthBar.SetSize(GetHealthPercent());
+
+        Collider2D[] respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, meleeEnemies);
+        for (int i = 0; i < respawn.Length; i++)
+        {
+            respawn[i].GetComponent<MeleeEnemy>().Respawn();
+        }
+        respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, rangeEnemies);
+        for (int i = 0; i < respawn.Length; i++)
+        {
+            respawn[i].GetComponent<RangeEnemy>().Respawn();
+        }
+        respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, turretEnemies);
+        for (int i = 0; i < respawn.Length; i++)
+        {
+            respawn[i].GetComponent<TurretEnemy>().Respawn();
+        }
+        respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, heal);
+        for (int i = 0; i < respawn.Length; i++)
+        {
+            respawn[i].GetComponent<AidKitScript>().Respawn();
+        }
     }
+
 
     public float GetHealthPercent()
     {
@@ -32,7 +58,6 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         SoundManagerScript.PlaySound("takenDamage");
-        Debug.Log("Player taken Damage");
         healthBar.SetSize(GetHealthPercent());
         health -= damage;
         if (health <= 0)

@@ -503,8 +503,7 @@ MonoBehaviour:
   maxHealth: 5
   damage: 1
   attackPos: {fileID: 8234147718868063383}
-  PlayerPos: {fileID: 8625914645639927152, guid: 4b98ba0c21a70c24c90f31623a83cea5,
-    type: 3}
+  PlayerPos: {fileID: 0}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 512

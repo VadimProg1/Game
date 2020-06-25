@@ -18,12 +18,7 @@ public class PlayerAttack : MonoBehaviour
     public int damage;
     private bool hitCheck;
 
-    GameObject objShake;
-
-    void Start()
-    {
-        objShake = GameObject.FindGameObjectWithTag("Shaker");
-    }
+   
 
     void Update()
     {      
@@ -43,9 +38,7 @@ public class PlayerAttack : MonoBehaviour
                     if (GetComponent<PlayerController>().dashing)
                     {
                         GetComponent<PlayerController>().dashHit = true;
-                    }
-                    objShake.GetComponent<CameraShakerScript>().Shake();
-                    SoundManagerScript.PlaySound("playerHit");                    
+                    }                             
                 }
 
                 enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, rangeEnemies);
@@ -60,8 +53,6 @@ public class PlayerAttack : MonoBehaviour
                     {
                         GetComponent<PlayerController>().dashHit = true;
                     }
-                    objShake.GetComponent<CameraShakerScript>().Shake();
-                    SoundManagerScript.PlaySound("playerHit");
                 }
 
                 enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, turretEnemies);
@@ -76,8 +67,6 @@ public class PlayerAttack : MonoBehaviour
                     {
                         GetComponent<PlayerController>().dashHit = true;
                     }
-                    objShake.GetComponent<CameraShakerScript>().Shake();
-                    SoundManagerScript.PlaySound("playerHit");
                 }
 
                 enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, bossEnemy);
@@ -92,8 +81,6 @@ public class PlayerAttack : MonoBehaviour
                     {
                         GetComponent<PlayerController>().dashHit = true;
                     }
-                    objShake.GetComponent<CameraShakerScript>().Shake();
-                    SoundManagerScript.PlaySound("playerHit");
                 }
             }
             timeAttack = startDashTimeAttack;

@@ -31,6 +31,7 @@ public class TurretEnemy : MonoBehaviour
     public bool SeePlayer;
     private bool facingRight;
     private bool checkPlayerPosition;
+    private bool death = false;
 
     public Transform bar;
     private bool healthBarCheck;
@@ -43,9 +44,11 @@ public class TurretEnemy : MonoBehaviour
 
     Object bulletRef;
     GameObject obj;
+    GameObject objShake;
 
     void Start()
     {
+        objShake = GameObject.FindGameObjectWithTag("Shaker");
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
         matDefault = sr.material;
@@ -56,65 +59,68 @@ public class TurretEnemy : MonoBehaviour
     }
 
     void Update()
-    {     
-        SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
-
-        if (SeePlayer)
+    {
+        if (!death)
         {
-            if (timeAttackCheck)
-            {
-                timeAttack = startTimeAttack;
-            }
+            SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
 
-            if (attackPos.position.x < PlayerPos.position.x)
+            if (SeePlayer)
             {
-                if (!facingRight)
+                if (timeAttackCheck)
                 {
-                    Flip();
+                    timeAttack = startTimeAttack;
                 }
-            }
-            else
-            {
-                if (facingRight)
-                {
-                    Flip();
-                }
-            }
-            attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);
 
-            if (attack)
-            {
-                if (timeAttack <= 0 && PlayerPos.position.y < attackPos.position.y)
+                if (attackPos.position.x < PlayerPos.position.x)
                 {
-                    GameObject bul = (GameObject)Instantiate(bulletRef);
-                    if (facingRight)
+                    if (!facingRight)
                     {
-                        bul.transform.position = new Vector2(transform.position.x + 2f, transform.position.y);
-                        playerX = PlayerPos.position.x - 2f;
-                        playerY = PlayerPos.position.y;
-                        vecX = playerX - attackPos.position.x;
-                        vecY = playerY - attackPos.position.y;
-                        normVecX = vecX / Mathf.Sqrt(vecX * vecX + vecY * vecY);
-                        normVecY = vecY / Mathf.Sqrt(vecX * vecX + vecY * vecY);
-                        bul.GetComponent<Rigidbody2D>().velocity = new Vector2(normVecX * speed, normVecY * speed);                        
+                        Flip();
                     }
-                    else
-                    {
-                        bul.transform.position = new Vector2(transform.position.x - 2f, transform.position.y);
-                        playerX = PlayerPos.position.x + 2f;
-                        playerY = PlayerPos.position.y;
-                        vecX = playerX - attackPos.position.x;
-                        vecY = playerY - attackPos.position.y;
-                        normVecX = vecX / Mathf.Sqrt(vecX * vecX + vecY * vecY);
-                        normVecY = vecY / Mathf.Sqrt(vecX * vecX + vecY * vecY);
-                        bul.GetComponent<Rigidbody2D>().velocity = new Vector2(normVecX * speed, normVecY * speed);
-                    }
-                    timeAttackCheck = true;
                 }
                 else
                 {
-                    timeAttackCheck = false;
-                    timeAttack -= Time.deltaTime;
+                    if (facingRight)
+                    {
+                        Flip();
+                    }
+                }
+                attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);
+
+                if (attack)
+                {
+                    if (timeAttack <= 0 && PlayerPos.position.y < attackPos.position.y)
+                    {
+                        GameObject bul = (GameObject)Instantiate(bulletRef);
+                        if (facingRight)
+                        {
+                            bul.transform.position = new Vector2(transform.position.x + 2f, transform.position.y);
+                            playerX = PlayerPos.position.x - 2f;
+                            playerY = PlayerPos.position.y;
+                            vecX = playerX - attackPos.position.x;
+                            vecY = playerY - attackPos.position.y;
+                            normVecX = vecX / Mathf.Sqrt(vecX * vecX + vecY * vecY);
+                            normVecY = vecY / Mathf.Sqrt(vecX * vecX + vecY * vecY);
+                            bul.GetComponent<Rigidbody2D>().velocity = new Vector2(normVecX * speed, normVecY * speed);
+                        }
+                        else
+                        {
+                            bul.transform.position = new Vector2(transform.position.x - 2f, transform.position.y);
+                            playerX = PlayerPos.position.x + 2f;
+                            playerY = PlayerPos.position.y;
+                            vecX = playerX - attackPos.position.x;
+                            vecY = playerY - attackPos.position.y;
+                            normVecX = vecX / Mathf.Sqrt(vecX * vecX + vecY * vecY);
+                            normVecY = vecY / Mathf.Sqrt(vecX * vecX + vecY * vecY);
+                            bul.GetComponent<Rigidbody2D>().velocity = new Vector2(normVecX * speed, normVecY * speed);
+                        }
+                        timeAttackCheck = true;
+                    }
+                    else
+                    {
+                        timeAttackCheck = false;
+                        timeAttack -= Time.deltaTime;
+                    }
                 }
             }
         }
@@ -127,20 +133,47 @@ public class TurretEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        Debug.Log("Damage taken");
-        healthBar.SetSize(GetHealthPercent());
-        sr.material = matWhite;
-        if (health <= 0)
+        if (!death)
+        {           
+            health -= damage;
+            Debug.Log("Damage taken");
+            healthBar.SetSize(GetHealthPercent());
+            sr.material = matWhite;
+            if (health <= 0)
+            {
+                GameObject explosion = (GameObject)Instantiate(explosionRef);
+                explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                SoundManagerScript.PlaySound("enemyDeath");
+
+                death = true;
+                sr.enabled = false;
+                GetComponent<BoxCollider2D>().isTrigger = true;
+                healthBar.gameObject.SetActive(false);
+            }
+            else
+            {
+                Invoke("ResetMaterial", .1f);
+            }
+        }
+    }
+
+    public void Respawn()
+    {        
+        if (death)
         {
-            GameObject explosion = (GameObject)Instantiate(explosionRef);
-            explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            SoundManagerScript.PlaySound("enemyDeath");
-            Destroy(gameObject);
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            health = maxHealth;
+            sr.enabled = true;
+            death = false;
+            GetComponent<BoxCollider2D>().enabled = true;
+            ResetMaterial();
+            healthBar.gameObject.SetActive(true);
+            healthBar.SetSize(GetHealthPercent());
         }
         else
         {
-            Invoke("ResetMaterial", .1f);
+            health = maxHealth;
+            healthBar.SetSize(GetHealthPercent());
         }
     }
 

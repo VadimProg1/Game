@@ -453,7 +453,7 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 512
-  speed: 3
+  speed: 4
   seeRange: 15
   startTimeAttack: 1
   attackRange: 7

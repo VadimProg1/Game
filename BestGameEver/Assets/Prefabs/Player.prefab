@@ -481,7 +481,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0032099038, y: -0.00020226836}
+  m_Offset: {x: 0.0048270114, y: -0.00020226836}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -492,7 +492,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.12934014, y: 0.35998148}
+  m_Size: {x: 0.18648252, y: 0.35998148}
   m_EdgeRadius: 0
 --- !u!114 &1375383829703935385
 MonoBehaviour:
@@ -511,7 +511,19 @@ MonoBehaviour:
   indexOfSceneToRespawn: 1
   healthBar: {fileID: 1934406255}
   spawnPoint: {fileID: 0}
-  player: {fileID: 0}
+  player: {fileID: 8625914645639927152}
+  meleeEnemies:
+    serializedVersion: 2
+    m_Bits: 256
+  rangeEnemies:
+    serializedVersion: 2
+    m_Bits: 1024
+  turretEnemies:
+    serializedVersion: 2
+    m_Bits: 2048
+  heal:
+    serializedVersion: 2
+    m_Bits: 65536
 --- !u!114 &8625914645639927162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,10 +541,10 @@ MonoBehaviour:
   moveInput: 0
   speed: 7
   groundCheck: {fileID: 8625914647562789763}
-  checkRadius: 0.5
+  checkRadius: 0.3
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 2
+    m_Bits: 38146
   facingRight: 1
   dashTime: 0.2
   dashing: 0
@@ -568,7 +580,7 @@ MonoBehaviour:
   bossEnemy:
     serializedVersion: 2
     m_Bits: 4096
-  attackRange: 1
+  attackRange: 1.5
   damage: 1
 --- !u!114 &8625914645639927156
 MonoBehaviour:
@@ -706,8 +718,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.060651015, y: -0.18161781}
-  - {x: 0.0678175, y: -0.18120973}
+  - {x: -0.088600926, y: -0.18107365}
+  - {x: 0.09868651, y: -0.18121994}
 --- !u!1 &8625914647562789884
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +744,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8625914647562789884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.018, y: -0.173, z: -962.14}
+  m_LocalPosition: {x: 0.0154, y: -0.186, z: -962.14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8625914645639927152}

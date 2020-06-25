@@ -26,11 +26,12 @@ public class MeleeEnemy : MonoBehaviour
     private bool timeAttackCheck = true;
     public bool SeePlayer;
     private bool facingRight;
+    private bool death = false;
 
     public Transform bar;
     private bool healthBarCheck;
     [SerializeField] private HealthBarScript healthBar;
-    private Transform spawnPosition;
+    Vector3 startPos;
     private Material matWhite;
     private Material matDefault;
     private UnityEngine.Object explosionRef;
@@ -38,10 +39,12 @@ public class MeleeEnemy : MonoBehaviour
     SpriteRenderer sr;
 
     GameObject obj;
+    GameObject objShake;
 
     void Start()
     {
-        spawnPosition = transform;
+        objShake = GameObject.FindGameObjectWithTag("Shaker");
+        startPos = transform.position;
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
         matDefault = sr.material;
@@ -52,52 +55,55 @@ public class MeleeEnemy : MonoBehaviour
     }
 
     void Update()
-    {       
-        SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
-        if (SeePlayer)
+    {
+        if (!death)
         {
-            if (timeAttackCheck)
+            SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
+            if (SeePlayer)
             {
-                timeAttack = startTimeAttack;
-            }
-            
-            if (attackPos.position.x < PlayerPos.position.x)
-            {
-                if(Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1.5f)
+                if (timeAttackCheck)
                 {
-                    transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
-                    if (!facingRight)
-                    {
-                        Flip();
-                    }
+                    timeAttack = startTimeAttack;
                 }
-            }
-            else
-            {
-                if (Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1.5f)
+
+                if (attackPos.position.x < PlayerPos.position.x)
                 {
-                    transform.Translate(Vector2.left * speed * Time.deltaTime);
-                    if (facingRight)
+                    if (Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1.5f)
                     {
-                        Flip();
+                        transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
+                        if (!facingRight)
+                        {
+                            Flip();
+                        }
                     }
-                }
-            }
-            attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);
-           
-            if (attack)
-            {
-                if (timeAttack <= 0)
-                {
-                    obj.GetComponent<PlayerHealth>().TakeDamage(damage);
-                    timeAttackCheck = true;
                 }
                 else
                 {
-                    timeAttackCheck = false;
-                    timeAttack -= Time.deltaTime;
+                    if (Mathf.Abs(attackPos.position.x - PlayerPos.position.x) > 1.5f)
+                    {
+                        transform.Translate(Vector2.left * speed * Time.deltaTime);
+                        if (facingRight)
+                        {
+                            Flip();
+                        }
+                    }
                 }
-            }           
+                attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);
+
+                if (attack)
+                {
+                    if (timeAttack <= 0)
+                    {
+                        obj.GetComponent<PlayerHealth>().TakeDamage(damage);
+                        timeAttackCheck = true;
+                    }
+                    else
+                    {
+                        timeAttackCheck = false;
+                        timeAttack -= Time.deltaTime;
+                    }
+                }
+            }
         }
     }
 
@@ -108,21 +114,51 @@ public class MeleeEnemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        Debug.Log("Damage taken");
-        sr.material = matWhite;
-        if (health <= 0)
+        if (!death)
         {
-            SoundManagerScript.PlaySound("enemyDeath");
-            GameObject explosion = (GameObject)Instantiate(explosionRef);
-            explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            Destroy(gameObject);
+            //objShake.GetComponent<CameraShakerScript>().Shake();
+            //SoundManagerScript.PlaySound("playerHit");
+
+            health -= damage;
+            Debug.Log("Damage taken");
+            sr.material = matWhite;
+            if (health <= 0)
+            {
+                SoundManagerScript.PlaySound("enemyDeath");
+                GameObject explosion = (GameObject)Instantiate(explosionRef);
+                explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                death = true;
+                sr.enabled = false;
+                GetComponent<BoxCollider2D>().isTrigger = true;
+                healthBar.gameObject.SetActive(false);
+            }
+            else
+            {
+                Invoke("ResetMaterial", .1f);
+            }
+            healthBar.SetSize(GetHealthPercent());
+        }
+    }
+
+    public void Respawn()
+    {
+        if (death)
+        {
+            health = maxHealth;
+            sr.enabled = true;
+            death = false;
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            ResetMaterial();
+            healthBar.gameObject.SetActive(true);
+            healthBar.SetSize(GetHealthPercent());
+            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
         }
         else
         {
-            Invoke("ResetMaterial", .1f);
+            health = maxHealth;
+            healthBar.SetSize(GetHealthPercent());
+            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
         }
-        healthBar.SetSize(GetHealthPercent());
     }
 
     void ResetMaterial()

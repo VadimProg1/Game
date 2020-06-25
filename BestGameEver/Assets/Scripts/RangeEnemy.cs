@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class RangeEnemy : MonoBehaviour
@@ -23,6 +24,7 @@ public class RangeEnemy : MonoBehaviour
     private bool timeAttackCheck = true;
     public bool SeePlayer;
     private bool facingRight;
+    private bool death;
 
     public Transform bar;
     private bool healthBarCheck;
@@ -32,12 +34,16 @@ public class RangeEnemy : MonoBehaviour
     private Material matDefault;
     private UnityEngine.Object explosionRef;
     SpriteRenderer sr;
+    Vector3 startPos;
 
     Object bulletRef;
     GameObject obj;
+    GameObject objShake;
 
     void Start()
     {
+        objShake = GameObject.FindGameObjectWithTag("Shaker");
+        startPos = transform.position;
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
         matDefault = sr.material;
@@ -48,55 +54,58 @@ public class RangeEnemy : MonoBehaviour
     }
 
     void Update()
-    {        
-        SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
-
-        if (SeePlayer)
+    {
+        if (!death)
         {
-            if (timeAttackCheck)
-            {
-                timeAttack = startTimeAttack;
-            }
+            SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
 
-            if (attackPos.position.x < PlayerPos.position.x)
+            if (SeePlayer)
             {
-                transform.Translate(Vector2.left * speed * Time.deltaTime);
-                if (!facingRight)
+                if (timeAttackCheck)
                 {
-                    Flip();
+                    timeAttack = startTimeAttack;
                 }
-            }
-            else
-            {
-                transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
-                if (facingRight)
-                {
-                    Flip();
-                }
-            }
-            attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);
 
-            if (attack)
-            {
-                if (timeAttack <= 0)
+                if (attackPos.position.x < PlayerPos.position.x)
                 {
-                    GameObject bul = (GameObject)Instantiate(bulletRef);
-                    if (facingRight)
+                    transform.Translate(Vector2.left * speed * Time.deltaTime);
+                    if (!facingRight)
                     {
-                        bul.transform.position = new Vector2(transform.position.x + 1f, transform.position.y + .2f);
-                        bul.GetComponent<Rigidbody2D>().velocity = new Vector2(shootingSpeed, 0);
+                        Flip();
                     }
-                    else
-                    {
-                        bul.transform.position = new Vector2(transform.position.x - 1f, transform.position.y - .2f);
-                        bul.GetComponent<Rigidbody2D>().velocity = new Vector2(-shootingSpeed, 0);
-                    }                  
-                    timeAttackCheck = true;
                 }
                 else
                 {
-                    timeAttackCheck = false;
-                    timeAttack -= Time.deltaTime;
+                    transform.Translate(-1 * Vector2.left * speed * Time.deltaTime);
+                    if (facingRight)
+                    {
+                        Flip();
+                    }
+                }
+                attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);
+
+                if (attack)
+                {
+                    if (timeAttack <= 0)
+                    {
+                        GameObject bul = (GameObject)Instantiate(bulletRef);
+                        if (facingRight)
+                        {
+                            bul.transform.position = new Vector2(transform.position.x + 1f, transform.position.y + .2f);
+                            bul.GetComponent<Rigidbody2D>().velocity = new Vector2(shootingSpeed, 0);
+                        }
+                        else
+                        {
+                            bul.transform.position = new Vector2(transform.position.x - 1f, transform.position.y - .2f);
+                            bul.GetComponent<Rigidbody2D>().velocity = new Vector2(-shootingSpeed, 0);
+                        }
+                        timeAttackCheck = true;
+                    }
+                    else
+                    {
+                        timeAttackCheck = false;
+                        timeAttack -= Time.deltaTime;
+                    }
                 }
             }
         }
@@ -107,22 +116,53 @@ public class RangeEnemy : MonoBehaviour
         return (float)health / (float)maxHealth;
     }
 
-    public void TakeDamage(int damage)
+    public void Respawn()
     {
-        health -= damage;
-        Debug.Log("Damage taken");
-        healthBar.SetSize(GetHealthPercent());
-        sr.material = matWhite;
-        if (health <= 0)
+        if (death)
         {
-            GameObject explosion = (GameObject)Instantiate(explosionRef);
-            explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            SoundManagerScript.PlaySound("enemyDeath");
-            Destroy(gameObject);
+            health = maxHealth;
+            sr.enabled = true;
+            death = false;
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            ResetMaterial();
+            healthBar.gameObject.SetActive(true);
+            healthBar.SetSize(GetHealthPercent());
+            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
         }
         else
         {
-            Invoke("ResetMaterial", .1f);
+            health = maxHealth;
+            healthBar.SetSize(GetHealthPercent());
+            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (!death)
+        {
+           // objShake.GetComponent<CameraShakerScript>().Shake();
+            //SoundManagerScript.PlaySound("playerHit");
+
+            health -= damage;
+            Debug.Log("Damage taken");
+            healthBar.SetSize(GetHealthPercent());
+            sr.material = matWhite;
+            if (health <= 0)
+            {
+                GameObject explosion = (GameObject)Instantiate(explosionRef);
+                explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                SoundManagerScript.PlaySound("enemyDeath");
+
+                death = true;
+                sr.enabled = false;
+                GetComponent<BoxCollider2D>().isTrigger = true;
+                healthBar.gameObject.SetActive(false);
+            }
+            else
+            {
+                Invoke("ResetMaterial", .1f);
+            }
         }
     }
 

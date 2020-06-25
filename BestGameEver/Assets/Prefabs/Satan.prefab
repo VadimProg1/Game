@@ -487,6 +487,8 @@ MonoBehaviour:
   rangeAttack: 0
   meleeAttack: 0
   SeePlayer: 0
+  secondPeekAttack: 0
+  firstPeekAttack: 0
   bar: {fileID: 1291466537}
   healthBar: {fileID: 1291466538}
 --- !u!70 &-334641914555639785
