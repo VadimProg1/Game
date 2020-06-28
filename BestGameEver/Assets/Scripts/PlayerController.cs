@@ -38,13 +38,16 @@ public class PlayerController : MonoBehaviour
     private Transform bar;
     private bool healthBarCheck;
     private TrailRenderer trail;
+    private float delayBeforeJump = 0.1f;
+    private float tempDelayBeforeJump = 0.1f;
 
     GameObject objShake;
-
+    public Animator animator;
     Object bulletRef;
 
     private void Start()
     {
+        //tempDelayBeforeJump = delayBeforeJump;
         rb = GetComponent<Rigidbody2D>();
         trail = GetComponent<TrailRenderer>();
         trail.enabled = false;
@@ -63,22 +66,34 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
             if (isGrounded)
-            {
+            {              
                 jumpCount = 1;
+                animator.SetBool("IsJumping", false);
+                //tempDelayBeforeJump = delayBeforeJump;
             }
-            moveInput = Input.GetAxis("Horizontal");            
+            else
+            {
+                animator.SetBool("IsJumping", true);
+            }           
+            moveInput = Input.GetAxis("Horizontal");
+            animator.SetFloat("Speed", Mathf.Abs(moveInput));
             tempWalkSoundTime -= Time.deltaTime;
             if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) && tempWalkSoundTime <= 0 && isGrounded)
             {
                 SoundManagerScript.PlaySound("playerWalk");                
                 tempWalkSoundTime = walkSoundTime;
-            }             
-            
-            rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+            }
+
+             rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+            //rb.MovePosition(new Vector2((transform.position.x + moveInput * speed), rb.velocity.y));
             if ((!facingRight && moveInput > 0) || (facingRight && moveInput < 0))
             {
                 Flip();
             }                      
+        }
+        else
+        {
+            animator.SetBool("IsJumping", true);
         }
     }
 
@@ -100,9 +115,22 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
+
+           /*
+            if (Input.GetKeyDown(KeyCode.K))
+            {
+                animator.SetBool("Death", true);
+            }
+            if (Input.GetKeyDown(KeyCode.L))
+            {
+                animator.SetBool("Death", false);
+            }
+            */
             //Shooting
             if (Input.GetKeyDown(KeyCode.X) && tempShootingCooldown <= 0)
             {
+               // animator.SetBool("IsJumping", false);
+                animator.SetBool("IsShooting", true);
                 tempShootingCooldown = shootingCooldown;
                 objShake.GetComponent<CameraShakerScript>().Shake();
                 SoundManagerScript.PlaySound("playerFire");
@@ -118,6 +146,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                animator.SetBool("IsShooting", false);
                 tempShootingCooldown -= Time.deltaTime;
             }
 

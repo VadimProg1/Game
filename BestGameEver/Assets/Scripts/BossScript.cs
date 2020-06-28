@@ -50,6 +50,7 @@ public class BossScript : MonoBehaviour
     private Material matDefault;
     SpriteRenderer sr;
 
+    public Animator animator;
     Rigidbody2D rb;
     Object bulletRef;
     GameObject obj;
@@ -110,6 +111,8 @@ public class BossScript : MonoBehaviour
                 }
                 rangeAttack = Physics2D.OverlapCircle(attackPos.position, rangeAttackRange, whatIsEnemies);
                 meleeAttack = Physics2D.OverlapCircle(attackPos.position, meleeAttackRange, whatIsEnemies);
+
+                animator.SetBool("Attack", meleeAttack);
 
                 if (rangeAttack)
                 {
@@ -240,6 +243,28 @@ public class BossScript : MonoBehaviour
             }
         }
         
+    }
+
+    public void Respawn()
+    {
+        health = maxHealth;
+        healthBar.SetSize(GetHealthPercent());
+
+        tempFlyingSectionShootingSpeed = flyingSectionShootingSpeed;
+        tempUpPeekingTime = upPeekingTime;
+        tempPeekingTime = peekingTime;
+        tempFlyingSectionTime = flyingSectionTime;
+        tempWaitForFlyAttack = waitForFlyAttack;
+
+        peekingAbility = false;
+        peeking = false;
+        firstFly = false;
+        secondFly = false;
+        stopMainAttacks = false;
+        if (rb.gravityScale == 0)
+        {            
+            rb.gravityScale = 2;
+        }
     }
 
     private void FlyingAttack()

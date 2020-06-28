@@ -11,11 +11,16 @@ public class PauseMenuScript : MonoBehaviour
     public AudioMixer audioMixerSound;
     public AudioMixer audioMixerMusic;
 
+    void Start()
+    {
+        Cursor.visible = false;
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Cursor.visible = true;
             if (GameIsPaused)
             {
                 Resume();
@@ -32,6 +37,7 @@ public class PauseMenuScript : MonoBehaviour
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        Cursor.visible = false;
     }
 
     public void Settings()

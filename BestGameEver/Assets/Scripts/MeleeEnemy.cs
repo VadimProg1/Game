@@ -130,6 +130,7 @@ public class MeleeEnemy : MonoBehaviour
                 death = true;
                 sr.enabled = false;
                 GetComponent<BoxCollider2D>().isTrigger = true;
+                GetComponent<EdgeCollider2D>().isTrigger = true;
                 healthBar.gameObject.SetActive(false);
             }
             else
@@ -148,6 +149,7 @@ public class MeleeEnemy : MonoBehaviour
             sr.enabled = true;
             death = false;
             GetComponent<BoxCollider2D>().isTrigger = false;
+            GetComponent<EdgeCollider2D>().isTrigger = false;
             ResetMaterial();
             healthBar.gameObject.SetActive(true);
             healthBar.SetSize(GetHealthPercent());

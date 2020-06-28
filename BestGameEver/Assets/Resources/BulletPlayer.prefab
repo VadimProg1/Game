@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletSpeed: 15
   damage: 1
-  timeToDestroy: 0.5
+  timeToDestroy: 1.5
   attackPos: {fileID: 4708118704986624207}
   meleeEnemies:
     serializedVersion: 2

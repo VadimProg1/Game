@@ -14,7 +14,10 @@ public class PlayerHealth : MonoBehaviour
     public LayerMask meleeEnemies;
     public LayerMask rangeEnemies;
     public LayerMask turretEnemies;
+    public LayerMask boss;
     public LayerMask heal;
+    public Animator animator;
+
 
     void Start()
     {
@@ -22,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void RespawnPlayer()
-    {
+    {        
         player.position = spawnPoint.position;
         health = healthMax;
         healthBar.SetSize(GetHealthPercent());
@@ -41,6 +44,11 @@ public class PlayerHealth : MonoBehaviour
         for (int i = 0; i < respawn.Length; i++)
         {
             respawn[i].GetComponent<TurretEnemy>().Respawn();
+        }
+        respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, boss);
+        for (int i = 0; i < respawn.Length; i++)
+        {
+            respawn[i].GetComponent<BossScript>().Respawn();
         }
         respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, heal);
         for (int i = 0; i < respawn.Length; i++)

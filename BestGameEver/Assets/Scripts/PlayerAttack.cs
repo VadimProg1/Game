@@ -18,13 +18,22 @@ public class PlayerAttack : MonoBehaviour
     public int damage;
     private bool hitCheck;
 
-   
+    public Animator animator;
+    private float animationTime = 0.005f;
+    private float tempAnimationTime = 0.005f;
+    bool checkAnimation = false;
 
     void Update()
-    {      
-        if(timeAttack <= 0 || GetComponent<PlayerController>().dashing)
+    {
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            tempAnimationTime = animationTime;
+            checkAnimation = true;
+        }
+
+        if (timeAttack <= 0 || GetComponent<PlayerController>().dashing)
+        {           
             if ((Input.GetKey(KeyCode.Space) && GetComponent<PlayerController>().dashing == false) || (GetComponent<PlayerController>().dashHit == false && GetComponent<PlayerController>().dashing))
             {
                 Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, meleeEnemies);
@@ -38,7 +47,11 @@ public class PlayerAttack : MonoBehaviour
                     if (GetComponent<PlayerController>().dashing)
                     {
                         GetComponent<PlayerController>().dashHit = true;
-                    }                             
+                    }
+                    else
+                    {
+                        checkAnimation = true;                      
+                    }
                 }
 
                 enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, rangeEnemies);
@@ -52,6 +65,10 @@ public class PlayerAttack : MonoBehaviour
                     if (GetComponent<PlayerController>().dashing)
                     {
                         GetComponent<PlayerController>().dashHit = true;
+                    }
+                    else
+                    {
+                        checkAnimation = true;
                     }
                 }
 
@@ -67,6 +84,10 @@ public class PlayerAttack : MonoBehaviour
                     {
                         GetComponent<PlayerController>().dashHit = true;
                     }
+                    else
+                    {
+                        checkAnimation = true;
+                    }
                 }
 
                 enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, bossEnemy);
@@ -81,6 +102,10 @@ public class PlayerAttack : MonoBehaviour
                     {
                         GetComponent<PlayerController>().dashHit = true;
                     }
+                    else
+                    {
+                        checkAnimation = true;
+                    }
                 }
             }
             timeAttack = startDashTimeAttack;
@@ -89,5 +114,18 @@ public class PlayerAttack : MonoBehaviour
         {
             timeAttack -= Time.deltaTime;
         }
+
+        if (checkAnimation && tempAnimationTime >= 0)
+        {
+            animator.SetBool("IsAttacking", true);
+            tempAnimationTime -= Time.deltaTime;
+        }
+        else
+        {
+            animator.SetBool("IsAttacking", false);
+            checkAnimation = false;
+            tempAnimationTime = animationTime;
+        }
     }
+
 }

@@ -32015,6 +32015,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3732808579216356288, guid: cc52a7490e3d4eb428703adf43e72a62,
+        type: 3}
+      propertyPath: m_ScreenY
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732808579216356288, guid: cc52a7490e3d4eb428703adf43e72a62,
+        type: 3}
+      propertyPath: m_XDamping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732808579216356288, guid: cc52a7490e3d4eb428703adf43e72a62,
+        type: 3}
+      propertyPath: m_YDamping
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3732808579758530384, guid: cc52a7490e3d4eb428703adf43e72a62,
         type: 3}
       propertyPath: m_Name
@@ -32080,6 +32095,16 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1063056563}
+    - target: {fileID: 3732808579758530399, guid: cc52a7490e3d4eb428703adf43e72a62,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732808579758530399, guid: cc52a7490e3d4eb428703adf43e72a62,
+        type: 3}
+      propertyPath: m_Transitions.m_BlendHint
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc52a7490e3d4eb428703adf43e72a62, type: 3}
 --- !u!1001 &4691429394669326734
@@ -32525,7 +32550,13 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1063056563}
-    m_RemovedComponents: []
+    - target: {fileID: 8276904131228976095, guid: df2262d7fe64bdb499f936678fa609a5,
+        type: 3}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8276904131228976094, guid: df2262d7fe64bdb499f936678fa609a5, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: df2262d7fe64bdb499f936678fa609a5, type: 3}
 --- !u!1001 &8625914646297698755
 PrefabInstance:

@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 8234147719419954565}
   - component: {fileID: 8234147719419954566}
   - component: {fileID: 8234147719419954681}
+  - component: {fileID: 4178550179886119897}
   m_Layer: 8
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -533,3 +534,22 @@ EdgeCollider2D:
   m_Points:
   - {x: -0.15203571, y: -0.24315828}
   - {x: 0.14565182, y: -0.24315831}
+--- !u!95 &4178550179886119897
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8234147719419954562}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5ba67b4c6e3e6c64ba73ba2c339e8fa1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

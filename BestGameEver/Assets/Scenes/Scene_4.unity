@@ -45225,6 +45225,11 @@ PrefabInstance:
       propertyPath: whatIsGround.m_Bits
       value: 5378
       objectReference: {fileID: 0}
+    - target: {fileID: 8625914645639927162, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+        type: 3}
+      propertyPath: checkRadius
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b98ba0c21a70c24c90f31623a83cea5, type: 3}
 --- !u!4 &948726756 stripped
@@ -46974,6 +46979,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 8276904131228976095, guid: df2262d7fe64bdb499f936678fa609a5,
+        type: 3}
+      propertyPath: orthographic size
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df2262d7fe64bdb499f936678fa609a5, type: 3}
 --- !u!1001 &1458382396
@@ -48496,6 +48506,11 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1566272169}
+    - target: {fileID: 3732808579758530399, guid: cc52a7490e3d4eb428703adf43e72a62,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc52a7490e3d4eb428703adf43e72a62, type: 3}
 --- !u!4 &1912715323 stripped

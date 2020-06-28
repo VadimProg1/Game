@@ -124,6 +124,7 @@ public class RangeEnemy : MonoBehaviour
             sr.enabled = true;
             death = false;
             GetComponent<BoxCollider2D>().isTrigger = false;
+            GetComponent<EdgeCollider2D>().isTrigger = false;
             ResetMaterial();
             healthBar.gameObject.SetActive(true);
             healthBar.SetSize(GetHealthPercent());
@@ -157,6 +158,7 @@ public class RangeEnemy : MonoBehaviour
                 death = true;
                 sr.enabled = false;
                 GetComponent<BoxCollider2D>().isTrigger = true;
+                GetComponent<EdgeCollider2D>().isTrigger = true;
                 healthBar.gameObject.SetActive(false);
             }
             else

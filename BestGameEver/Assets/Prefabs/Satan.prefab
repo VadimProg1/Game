@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 100983084842085960}
   - component: {fileID: 100983084842085955}
   - component: {fileID: -334641914555639785}
+  - component: {fileID: 3467440211932644182}
   m_Layer: 12
   m_Name: Satan
   m_TagString: Enemy
@@ -491,6 +492,7 @@ MonoBehaviour:
   firstPeekAttack: 0
   bar: {fileID: 1291466537}
   healthBar: {fileID: 1291466538}
+  animator: {fileID: 3467440211932644182}
 --- !u!70 &-334641914555639785
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -507,6 +509,25 @@ CapsuleCollider2D:
   m_Offset: {x: -0.003509215, y: 0.004235438}
   m_Size: {x: 0.21642822, y: 0.65172875}
   m_Direction: 0
+--- !u!95 &3467440211932644182
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100983084842085961}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d8040d30de4886a4cb5260d204147175, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5183043934241813063
 GameObject:
   m_ObjectHideFlags: 0

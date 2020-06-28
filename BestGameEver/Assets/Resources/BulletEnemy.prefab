@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageFromBullet: 1
-  timeToDestroy: 3
+  timeToDestroy: 5
 --- !u!96 &-2833929261799603984
 TrailRenderer:
   serializedVersion: 2

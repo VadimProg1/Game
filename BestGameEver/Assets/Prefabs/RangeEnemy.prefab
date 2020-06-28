@@ -338,6 +338,7 @@ GameObject:
   - component: {fileID: 505287626574879399}
   - component: {fileID: 505287626574879392}
   - component: {fileID: -4189338410829302485}
+  - component: {fileID: 2582199864064944479}
   m_Layer: 10
   m_Name: RangeEnemy
   m_TagString: Enemy
@@ -505,6 +506,25 @@ MonoBehaviour:
   SeePlayer: 0
   bar: {fileID: 630340339}
   healthBar: {fileID: 630340340}
+--- !u!95 &2582199864064944479
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505287626574879394}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4d849e45d68e3784b9eabc8c404332a0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &505287627111910465
 GameObject:
   m_ObjectHideFlags: 0
