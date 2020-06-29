@@ -8,9 +8,12 @@ public class PauseMenuScript : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
+    public GameObject buyMenuUI;
+    public GameObject optionsMenuUI;
     public AudioMixer audioMixerSound;
     public AudioMixer audioMixerMusic;
-
+    public PlayerController player;
+    public MoneyScript money;
     void Start()
     {
         Cursor.visible = false;
@@ -35,6 +38,8 @@ public class PauseMenuScript : MonoBehaviour
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
+        buyMenuUI.SetActive(false);
+        optionsMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
         Cursor.visible = false;
@@ -43,6 +48,20 @@ public class PauseMenuScript : MonoBehaviour
     public void Settings()
     {
 
+    }
+
+    public void BuyExpBullets()
+    {
+        if(money.GetMoney() >= 2)
+        {
+            player.expBulletsIsBuyed = true;
+            money.EraseMoney(2);
+        }
+    }
+
+    public void BuyFreezeBullets()
+    {
+        player.freezeBulletsIsBuyed = true;
     }
 
     public void QuitGame()

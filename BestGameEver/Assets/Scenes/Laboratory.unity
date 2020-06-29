@@ -57635,6 +57635,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d27ea506214ded4429af111b485209ab, type: 3}
+--- !u!1001 &2041717901
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.844156
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 8.359836
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -59.772926
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812000, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119610703809812006, guid: e0995e775800ff74087a4cc0e79f51ef,
+        type: 3}
+      propertyPath: m_Name
+      value: MoneyManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e0995e775800ff74087a4cc0e79f51ef, type: 3}
 --- !u!4 &2065655752 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8599157961094360930, guid: cf0c4fb5e73ca1641b18fc939998a8c6,

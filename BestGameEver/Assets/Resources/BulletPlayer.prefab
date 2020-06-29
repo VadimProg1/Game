@@ -157,6 +157,9 @@ MonoBehaviour:
   turretEnemies:
     serializedVersion: 2
     m_Bits: 2048
+  miniMeleeEnemies:
+    serializedVersion: 2
+    m_Bits: 131072
   bossEnemy:
     serializedVersion: 2
     m_Bits: 4096
@@ -197,8 +200,8 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -838389909
-  m_SortingLayer: 2
+  m_SortingLayerID: 1889921925
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Time: 0.06
   m_Parameters:
