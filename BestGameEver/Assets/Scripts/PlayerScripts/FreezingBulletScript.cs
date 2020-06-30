@@ -17,6 +17,7 @@ public class FreezingBulletScript : MonoBehaviour
     public Transform attackPos;
     public LayerMask meleeEnemies;
     public LayerMask miniMeleeEnemies;
+    public LayerMask flyingEnemies;
     public LayerMask rangeEnemies;
     public LayerMask turretEnemies;
 
@@ -70,22 +71,30 @@ public class FreezingBulletScript : MonoBehaviour
             {
                 enemiesToDamage[i].GetComponent<MeleeEnemy>().Freeze(damage, freezeTime);
             }
+
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, miniMeleeEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<MiniMeleeEnemy>().Freeze(damage, freezeTime);
             }
+
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, rangeEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<RangeEnemy>().Freeze(damage, freezeTime);
             }
+
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, turretEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<TurretEnemy>().Freeze(damage, freezeTime);
             }
 
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, flyingEnemies);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<FlyingEnemyAI>().TakeDamage(damage);
+            }
 
             GameObject explosion = (GameObject)Instantiate(explosionRef);
             explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);

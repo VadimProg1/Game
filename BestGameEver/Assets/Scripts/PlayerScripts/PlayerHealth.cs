@@ -12,9 +12,11 @@ public class PlayerHealth : MonoBehaviour
     public Transform spawnPoint;
     public Transform player;
     public LayerMask meleeEnemies;
+    public LayerMask miniMeleeEnemies;
     public LayerMask rangeEnemies;
     public LayerMask turretEnemies;
     public LayerMask boss;
+    public LayerMask flyingEnemies;
     public LayerMask heal;
     public Animator animator;
 
@@ -35,21 +37,37 @@ public class PlayerHealth : MonoBehaviour
         {
             respawn[i].GetComponent<MeleeEnemy>().Respawn();
         }
+
         respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, rangeEnemies);
         for (int i = 0; i < respawn.Length; i++)
         {
             respawn[i].GetComponent<RangeEnemy>().Respawn();
         }
+
         respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, turretEnemies);
         for (int i = 0; i < respawn.Length; i++)
         {
             respawn[i].GetComponent<TurretEnemy>().Respawn();
         }
+
         respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, boss);
         for (int i = 0; i < respawn.Length; i++)
         {
             respawn[i].GetComponent<BossScript>().Respawn();
         }
+
+        respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, miniMeleeEnemies);
+        for (int i = 0; i < respawn.Length; i++)
+        {
+            respawn[i].GetComponent<MiniMeleeEnemy>().Respawn();
+        }
+
+        respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, flyingEnemies);
+        for (int i = 0; i < respawn.Length; i++)
+        {
+            respawn[i].GetComponent<FlyingEnemyAI>().Respawn();
+        }
+
         respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, heal);
         for (int i = 0; i < respawn.Length; i++)
         {

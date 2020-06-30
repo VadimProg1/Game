@@ -15,6 +15,7 @@ public class PlayerAttack : MonoBehaviour
     public LayerMask turretEnemies;
     public LayerMask bossEnemy;
     public LayerMask MiniMeleeEnemies;
+    public LayerMask FlyingEnemies;
     public float attackRange;
     public int damage;
     private bool hitCheck;
@@ -127,10 +128,30 @@ public class PlayerAttack : MonoBehaviour
                 }
 
                 enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, MiniMeleeEnemies);
-                hitCheck = Physics2D.OverlapCircle(attackPos.position, attackRange, bossEnemy);
+                hitCheck = Physics2D.OverlapCircle(attackPos.position, attackRange, MiniMeleeEnemies);
                 for (int i = 0; i < enemiesToDamage.Length; i++)
                 {
                     enemiesToDamage[i].GetComponent<MiniMeleeEnemy>().TakeDamage(damage);
+                }
+                if (hitCheck)
+                {
+                    timeAttack = startDashTimeAttack;
+                    if (GetComponent<PlayerController>().dashing)
+                    {
+                        GetComponent<PlayerController>().dashHit = true;
+                    }
+                    else
+                    {
+                        animator.SetBool("IsAttacking", true);
+                        //checkAnimation = true;
+                    }
+                }
+
+                enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, attackRange, FlyingEnemies);
+                hitCheck = Physics2D.OverlapCircle(attackPos.position, attackRange, FlyingEnemies);
+                for (int i = 0; i < enemiesToDamage.Length; i++)
+                {
+                    enemiesToDamage[i].GetComponent<FlyingEnemyAI>().TakeDamage(damage);
                 }
                 if (hitCheck)
                 {
@@ -151,19 +172,7 @@ public class PlayerAttack : MonoBehaviour
         {
             animator.SetBool("IsAttacking", false);
             timeAttack -= Time.deltaTime;
-        }
-
-       /* if (checkAnimation && tempAnimationTime >= 0)
-        {
-            animator.SetBool("IsAttacking", true);           
-        }
-        else
-        {
-            animator.SetBool("IsAttacking", false);
-            checkAnimation = false;
-            tempAnimationTime = animationTime;
-        }
-        */
+        } 
     }
     
 }

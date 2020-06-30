@@ -128,11 +128,11 @@ public class PlayerController : MonoBehaviour
             {
                 shootingMode = 1;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2) && expBulletsIsBuyed)
             {
                 shootingMode = 2;
             }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
+            if (Input.GetKeyDown(KeyCode.Alpha3) && freezeBulletsIsBuyed)
             {
                 shootingMode = 3;
             }

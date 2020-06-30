@@ -168,12 +168,12 @@ public class MeleeEnemy : MonoBehaviour
             health = maxHealth;
             sr.enabled = true;
             death = false;
+            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
             GetComponent<BoxCollider2D>().isTrigger = false;
             GetComponent<EdgeCollider2D>().isTrigger = false;
             ResetMaterial();
             healthBar.gameObject.SetActive(true);
             healthBar.SetSize(GetHealthPercent());
-            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
         }
         else
         {

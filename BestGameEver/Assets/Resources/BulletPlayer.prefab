@@ -160,6 +160,9 @@ MonoBehaviour:
   miniMeleeEnemies:
     serializedVersion: 2
     m_Bits: 131072
+  flyingEnemies:
+    serializedVersion: 2
+    m_Bits: 262144
   bossEnemy:
     serializedVersion: 2
     m_Bits: 4096

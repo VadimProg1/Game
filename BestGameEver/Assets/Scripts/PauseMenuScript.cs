@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
+using TMPro;
 
 public class PauseMenuScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PauseMenuScript : MonoBehaviour
     public AudioMixer audioMixerMusic;
     public PlayerController player;
     public MoneyScript money;
+    public TextMeshProUGUI moneyValue;
     void Start()
     {
         Cursor.visible = false;
@@ -57,11 +59,22 @@ public class PauseMenuScript : MonoBehaviour
             player.expBulletsIsBuyed = true;
             money.EraseMoney(2);
         }
+        UpdateMoneyValue();
+    }
+
+    public void UpdateMoneyValue()
+    {
+        moneyValue.text = money.GetMoney().ToString();
     }
 
     public void BuyFreezeBullets()
     {
-        player.freezeBulletsIsBuyed = true;
+        if (money.GetMoney() >= 2)
+        {
+            player.freezeBulletsIsBuyed = true;
+            money.EraseMoney(2);
+        }
+        UpdateMoneyValue();
     }
 
     public void QuitGame()

@@ -16,6 +16,7 @@ public class ExplosionBulletScript : MonoBehaviour
     public Transform attackPos;
     public LayerMask meleeEnemies;
     public LayerMask miniMeleeEnemies;
+    public LayerMask flyingEnemies;
     public LayerMask rangeEnemies;
     public LayerMask turretEnemies;
     public LayerMask bossEnemy;
@@ -42,10 +43,12 @@ public class ExplosionBulletScript : MonoBehaviour
             if (objPlayer.GetComponent<PlayerController>().facingRight == true)
             {
                 rb.velocity = new Vector2(bulletSpeed, 0);
+               // objPlayer.GetComponent<PlayerController>().rb.velocity = new Vector2(-30, 10);
             }
             else
             {
                 rb.velocity = new Vector2(-bulletSpeed, 0);
+               // objPlayer.GetComponent<PlayerController>().rb.velocity = new Vector2(30, 10);
             }
         }
         timeToDestroy -= Time.deltaTime;
@@ -80,16 +83,19 @@ public class ExplosionBulletScript : MonoBehaviour
             {
                 enemiesToDamage[i].GetComponent<MeleeEnemy>().TakeDamage(damage);
             }
+
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, rangeEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<RangeEnemy>().TakeDamage(damage);
             }
+
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, turretEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<TurretEnemy>().TakeDamage(damage);
             }
+
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, bossEnemy);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
@@ -101,11 +107,19 @@ public class ExplosionBulletScript : MonoBehaviour
                 checkPlayerHit = false;
                 objPlayer.GetComponent<PlayerHealth>().TakeDamage(damage);
             }
+
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, miniMeleeEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
                 enemiesToDamage[i].GetComponent<MiniMeleeEnemy>().TakeDamage(damage);
             }
+
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, flyingEnemies);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<FlyingEnemyAI>().TakeDamage(damage);
+            }
+
             GameObject explosion = (GameObject)Instantiate(explosionRef);
             explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             DestroyBullet();

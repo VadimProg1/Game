@@ -123,8 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad33b30038f78904aad3720d88974216, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 10
-  damage: 1
+  bulletSpeed: 8
+  damage: 3
   timeToDestroy: 2
   attackPos: {fileID: 1118780707290073692}
   meleeEnemies:
@@ -133,6 +133,9 @@ MonoBehaviour:
   miniMeleeEnemies:
     serializedVersion: 2
     m_Bits: 131072
+  flyingEnemies:
+    serializedVersion: 2
+    m_Bits: 262144
   rangeEnemies:
     serializedVersion: 2
     m_Bits: 1024

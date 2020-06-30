@@ -154,6 +154,9 @@ MonoBehaviour:
   miniMeleeEnemies:
     serializedVersion: 2
     m_Bits: 131072
+  flyingEnemies:
+    serializedVersion: 2
+    m_Bits: 262144
   rangeEnemies:
     serializedVersion: 2
     m_Bits: 1024
