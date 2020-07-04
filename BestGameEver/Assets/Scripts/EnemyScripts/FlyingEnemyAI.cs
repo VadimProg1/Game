@@ -15,6 +15,8 @@ public class FlyingEnemyAI : MonoBehaviour
     private int health;
     int currentWaypoint = 0;
     public int damage;
+    public int maxFreezeBulletCounter = 2;
+    private int freezeBulletCounter = 0;
 
     private float speed;
     public float speedMax;
@@ -211,8 +213,13 @@ public class FlyingEnemyAI : MonoBehaviour
 
     public void Freeze(int damage, float freezeTime)
     {
-        timeFreeze = freezeTime;
-        frozen = true;
+        freezeBulletCounter++;
+        if (freezeBulletCounter >= maxFreezeBulletCounter)
+        {
+            timeFreeze = freezeTime;
+            frozen = true;
+            freezeBulletCounter = 0;
+        }
         TakeDamage(damage);
     }
 

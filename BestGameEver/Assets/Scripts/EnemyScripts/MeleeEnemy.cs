@@ -11,6 +11,8 @@ public class MeleeEnemy : MonoBehaviour
     public int maxHealth;
     private int health;
     public int damage;
+    public int maxFreezeBulletCounter = 2;
+    public int freezeBulletCounter = 0;
 
     public Transform attackPos;
     public Transform PlayerPos;
@@ -127,8 +129,13 @@ public class MeleeEnemy : MonoBehaviour
 
     public void Freeze(int damage, float freezeTime)
     {
-        timeFreeze = freezeTime;
-        frozen = true;
+        freezeBulletCounter++;
+        if(freezeBulletCounter >= maxFreezeBulletCounter)
+        {
+            timeFreeze = freezeTime;
+            frozen = true;
+            freezeBulletCounter = 0;
+        }
         TakeDamage(damage);
     }
 

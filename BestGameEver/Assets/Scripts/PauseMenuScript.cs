@@ -56,7 +56,7 @@ public class PauseMenuScript : MonoBehaviour
     {
         if(money.GetMoney() >= 2)
         {
-            player.expBulletsIsBuyed = true;
+            player.ExplosionIsBuyed();
             money.EraseMoney(2);
         }
         UpdateMoneyValue();
@@ -71,7 +71,7 @@ public class PauseMenuScript : MonoBehaviour
     {
         if (money.GetMoney() >= 2)
         {
-            player.freezeBulletsIsBuyed = true;
+            player.FreezeIsBuyed();
             money.EraseMoney(2);
         }
         UpdateMoneyValue();

@@ -20,6 +20,7 @@ public class FreezingBulletScript : MonoBehaviour
     public LayerMask flyingEnemies;
     public LayerMask rangeEnemies;
     public LayerMask turretEnemies;
+    public LayerMask boss;
 
     GameObject objPlayer;
     private UnityEngine.Object explosionRef;
@@ -93,9 +94,14 @@ public class FreezingBulletScript : MonoBehaviour
             enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, flyingEnemies);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<FlyingEnemyAI>().TakeDamage(damage);
+                enemiesToDamage[i].GetComponent<FlyingEnemyAI>().Freeze(damage, freezeTime);
             }
 
+            enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position, 1f, boss);
+            for (int i = 0; i < enemiesToDamage.Length; i++)
+            {
+                enemiesToDamage[i].GetComponent<BossScript>().TakeDamage(damage);
+            }
             GameObject explosion = (GameObject)Instantiate(explosionRef);
             explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             DestroyBullet();

@@ -163,3 +163,6 @@ MonoBehaviour:
   turretEnemies:
     serializedVersion: 2
     m_Bits: 2048
+  boss:
+    serializedVersion: 2
+    m_Bits: 4096

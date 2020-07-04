@@ -55,6 +55,8 @@ public class BossScript : MonoBehaviour
     Object bulletRef;
     GameObject obj;
     GameObject objShake;
+    public GameObject trail1;
+    public GameObject trail2;
 
     void Start()
     {
@@ -157,6 +159,9 @@ public class BossScript : MonoBehaviour
         {           
             if(tempWaitForFlyAttack >= 0)
             {
+                objShake.GetComponent<CameraShakerScript>().Shake();
+                trail1.SetActive(true);
+                trail2.SetActive(true);
                 rb.velocity = new Vector2(rb.velocity.x, 6f);
                 rb.gravityScale = 0;
                 tempWaitForFlyAttack -= Time.deltaTime;
@@ -165,6 +170,8 @@ public class BossScript : MonoBehaviour
             {
                 stopMainAttacks = true;
                 tempFlyingSectionTime -= Time.deltaTime;
+                trail1.SetActive(false);
+                trail2.SetActive(false);
                 FlyingAttack();
             }
         }
@@ -174,12 +181,17 @@ public class BossScript : MonoBehaviour
             peekingAbility = false;
             if (tempWaitForFlyAttack >= 0)
             {
+                objShake.GetComponent<CameraShakerScript>().Shake();
+                trail1.SetActive(true);
+                trail2.SetActive(true);
                 rb.velocity = new Vector2(rb.velocity.x, 6f);
                 rb.gravityScale = 0;
                 tempWaitForFlyAttack -= Time.deltaTime;
             }
             else
             {
+                trail1.SetActive(false);
+                trail2.SetActive(false);
                 stopMainAttacks = true;
                 tempFlyingSectionTime -= Time.deltaTime;
                 FlyingAttack();
@@ -219,12 +231,17 @@ public class BossScript : MonoBehaviour
             float normVecY = vecY / Mathf.Sqrt(vecX * vecX + vecY * vecY);
             if (tempUpPeekingTime > 0)
             {
+                objShake.GetComponent<CameraShakerScript>().Shake();
+                trail1.SetActive(true);
+                trail2.SetActive(true);
                 rb.gravityScale = 0;
                 rb.velocity = new Vector2(rb.velocity.x, 1f);
                 tempUpPeekingTime -= Time.deltaTime;
             }
             else if(tempUpPeekingTime >= -0.3f)
             {
+                trail1.SetActive(false);
+                trail2.SetActive(false);
                 tempUpPeekingTime -= Time.deltaTime;               
                 rb.velocity = new Vector2(normVecX * 10f, normVecY * 10f);
             }

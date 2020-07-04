@@ -7,6 +7,8 @@ public class MiniMeleeEnemy : MonoBehaviour
     public int maxHealth;
     private int health;
     public int damage;
+    public int maxFreezeBulletCounter = 2;
+    private int freezeBulletCounter = 0;
 
     public Transform attackPos;
     public Transform PlayerPos;
@@ -49,6 +51,7 @@ public class MiniMeleeEnemy : MonoBehaviour
 
     private bool frozen = false;
     private float timeFreeze = -1;
+
 
     void Start()
     {
@@ -182,8 +185,13 @@ public class MiniMeleeEnemy : MonoBehaviour
 
     public void Freeze(int damage, float freezeTime)
     {
-        timeFreeze = freezeTime;
-        frozen = true;
+        freezeBulletCounter++;
+        if (freezeBulletCounter >= maxFreezeBulletCounter)
+        {
+            timeFreeze = freezeTime;
+            frozen = true;
+            freezeBulletCounter = 0;
+        }
         TakeDamage(damage);
     }
 
@@ -220,12 +228,12 @@ public class MiniMeleeEnemy : MonoBehaviour
             health = maxHealth;
             sr.enabled = true;
             death = false;
+            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
             GetComponent<BoxCollider2D>().isTrigger = false;
             GetComponent<EdgeCollider2D>().isTrigger = false;
             ResetMaterial();
             healthBar.gameObject.SetActive(true);
-            healthBar.SetSize(GetHealthPercent());
-            transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
+            healthBar.SetSize(GetHealthPercent());           
         }
         else
         {

@@ -48,8 +48,8 @@ public class PlayerController : MonoBehaviour
     Object expBulletRef;
     Object freezeBulletRef;
 
-    public bool freezeBulletsIsBuyed = false;
-    public bool expBulletsIsBuyed = false;
+    static public bool freezeBulletsIsBuyed = false;
+    static public bool expBulletsIsBuyed = false;
 
     private void Start()
     {
@@ -259,6 +259,16 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = Vector2.up * jumpForce;
             jumpCount++;
         }
+    }
+
+    public void FreezeIsBuyed()
+    {
+        freezeBulletsIsBuyed = true;
+    }
+
+    public void ExplosionIsBuyed()
+    {
+        expBulletsIsBuyed = true;
     }
 
     void Flip()
