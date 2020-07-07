@@ -9,9 +9,9 @@ public class MusicManagerScript : MonoBehaviour
 
     void Start()
     {
-        musicClip = Resources.Load<AudioClip>("Music");       
-        audioSrc = GetComponent<AudioSource>();
-        PlaySound("Music");
+       // musicClip = Resources.Load<AudioClip>("Music");       
+       // audioSrc = GetComponent<AudioSource>();
+        //PlaySound("Music");
     }
 
     public static void PlaySound(string clip)

@@ -367,8 +367,8 @@ GameObject:
   - component: {fileID: 8234147719419954680}
   - component: {fileID: 8234147719419954565}
   - component: {fileID: 8234147719419954566}
-  - component: {fileID: 8234147719419954681}
   - component: {fileID: 4178550179886119897}
+  - component: {fileID: 8678793392716987282}
   m_Layer: 8
   m_Name: MeleeEnemy
   m_TagString: Enemy
@@ -476,7 +476,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.002755165, y: -0.0055103227}
+  m_Offset: {x: 0.0014866143, y: -0.0033894032}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -487,7 +487,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.30122215, y: 0.4697938}
+  m_Size: {x: 0.2927386, y: 0.46555194}
   m_EdgeRadius: 0
 --- !u!114 &8234147719419954566
 MonoBehaviour:
@@ -503,37 +503,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 5
   damage: 1
+  maxFreezeBulletCounter: 2
+  freezeBulletCounter: 0
   attackPos: {fileID: 8234147718868063383}
-  PlayerPos: {fileID: 0}
+  PlayerPos: {fileID: 8625914645639927152, guid: 4b98ba0c21a70c24c90f31623a83cea5,
+    type: 3}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 512
   speed: 1
-  seeRange: 5
+  seeRange: 18
   startTimeAttack: 0.5
   attackRange: 1.4
   attack: 0
   SeePlayer: 0
   bar: {fileID: 2091345244}
   healthBar: {fileID: 2091345245}
---- !u!68 &8234147719419954681
-EdgeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8234147719419954562}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.15203571, y: -0.24315828}
-  - {x: 0.14565182, y: -0.24315831}
+  animator: {fileID: 4178550179886119897}
 --- !u!95 &4178550179886119897
 Animator:
   serializedVersion: 3
@@ -553,3 +539,21 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!68 &8678793392716987282
+EdgeCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8234147719419954562}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: -0.11968963, y: -0.2494269}
+  - {x: 0.1493632, y: -0.24936216}

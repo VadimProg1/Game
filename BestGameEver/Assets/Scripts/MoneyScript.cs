@@ -6,7 +6,6 @@ public class MoneyScript : MonoBehaviour
 {
     static public int earnedMoneyStatic = 0;
     public int earnedMoney = 0;
-
     public int GetMoney()
     {
         earnedMoney = earnedMoneyStatic;

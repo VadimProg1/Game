@@ -35,6 +35,8 @@ public class FlyingEnemyAI : MonoBehaviour
     private bool death = false;
     private bool frozen = false;
     private bool healthBarCheck;
+    private bool firstDeath = true;
+    public bool isSpawned = false;
 
     Path path;
     Seeker seeker;
@@ -43,12 +45,14 @@ public class FlyingEnemyAI : MonoBehaviour
     GameObject obj;
     GameObject objShake;
     SpriteRenderer sr;
+    public Animator animator;
 
     [SerializeField] private HealthBarScript healthBar;
 
     private Material matWhite;
     private Material matDefault;
     private UnityEngine.Object explosionRef;
+    private UnityEngine.Object coinRef;
 
     void Start()
     {
@@ -57,13 +61,14 @@ public class FlyingEnemyAI : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         startPos = transform.position;
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        coinRef = Resources.Load("Coin");
         matDefault = sr.material;
         explosionRef = Resources.Load("Explosion");
         obj = GameObject.FindGameObjectWithTag("Player");
         health = maxHealth;
         timeAttack = startTimeAttack;
         speed = speedMax;
-
+        seeker.StartPath(rb.position, target.position, OnPathComplete);
         InvokeRepeating("UpdatePath", 0f, .5f);
     }
 
@@ -86,50 +91,65 @@ public class FlyingEnemyAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(path == null)
+        SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
+        if (SeePlayer && !frozen)
         {
-            return;
-        }
-        if (currentWaypoint >= path.vectorPath.Count)
-        {
-            reachedEndOfPath = true;
-            return;
-        }
-        else
-        {
-            reachedEndOfPath = false;
-        }
-
-        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
-        Vector2 force = direction * speed * Time.deltaTime;
-
-        rb.AddForce(force);
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
-
-        if(distance < nextWaypointDistance)
-        {
-            currentWaypoint++;
-        }
-
-        if (rb.velocity.x >= 0.01f)
-        {
-            if (!facingRight)
+            if (path == null)
             {
-                Flip();
+                return;
+            }
+            if (currentWaypoint >= path.vectorPath.Count)
+            {
+                reachedEndOfPath = true;
+                return;
+            }
+            else
+            {
+                reachedEndOfPath = false;
+            }
+            SeePlayer = Physics2D.OverlapCircle(attackPos.position, seeRange, whatIsEnemies);
+
+            Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
+            Vector2 force = direction * speed * Time.deltaTime;
+            rb.AddForce(force);
+
+            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWaypoint]);
+
+            if (distance < nextWaypointDistance)
+            {
+                currentWaypoint++;
+            }
+
+            if (rb.velocity.x >= 0.01f)
+            {
+                if (!facingRight)
+                {
+                    Flip();
+                }
+            }
+            else if (rb.velocity.x <= 0.01f)
+            {
+                if (facingRight)
+                {
+                    Flip();
+                }
             }
         }
-        else if (rb.velocity.x <= 0.01f)
-        {
-            if (facingRight)
-            {
-                Flip();
-            }
-        }     
     }
 
     void Update()
     {
+        if (timeFreeze > 0)
+        {
+            timeFreeze -= Time.deltaTime;
+        }
+        else
+        {
+            rb.gravityScale = 0f;
+            frozen = false;
+            animator.SetBool("IsFrozen", false);
+        }
+
         if (!death && !frozen)
         {
             attack = Physics2D.OverlapCircle(attackPos.position, attackRange, whatIsEnemies);
@@ -179,7 +199,6 @@ public class FlyingEnemyAI : MonoBehaviour
             //objShake.GetComponent<CameraShakerScript>().Shake();
             //SoundManagerScript.PlaySound("playerHit");
 
-            speed = 0;
             health -= damage;
             Debug.Log("Damage taken");
             sr.material = matWhite;
@@ -192,6 +211,17 @@ public class FlyingEnemyAI : MonoBehaviour
                 sr.enabled = false;
                 GetComponent<CircleCollider2D>().isTrigger = true;
                 healthBar.gameObject.SetActive(false);
+                if (firstDeath)
+                {
+                    firstDeath = false;
+                    GameObject coin = (GameObject)Instantiate(coinRef);
+                    coin.transform.position = new Vector2(transform.position.x, transform.position.y + 0.5f);
+                    coin.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 4);
+                }
+                if (isSpawned)
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {
@@ -216,6 +246,8 @@ public class FlyingEnemyAI : MonoBehaviour
         freezeBulletCounter++;
         if (freezeBulletCounter >= maxFreezeBulletCounter)
         {
+            animator.SetBool("IsFrozen", true);
+            rb.gravityScale = 1f;
             timeFreeze = freezeTime;
             frozen = true;
             freezeBulletCounter = 0;

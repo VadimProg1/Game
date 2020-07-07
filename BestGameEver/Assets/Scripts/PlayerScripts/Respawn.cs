@@ -12,7 +12,6 @@ public class Respawn : MonoBehaviour
     {
         if (other.transform.CompareTag("Player"))
         {
-            //other.transform.position = spawnPoint.position;
             res.RespawnPlayer();
         }
     }

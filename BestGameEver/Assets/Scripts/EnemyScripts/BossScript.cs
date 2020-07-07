@@ -162,12 +162,14 @@ public class BossScript : MonoBehaviour
                 objShake.GetComponent<CameraShakerScript>().Shake();
                 trail1.SetActive(true);
                 trail2.SetActive(true);
+                GetComponent<EdgeCollider2D>().isTrigger = true;
                 rb.velocity = new Vector2(rb.velocity.x, 6f);
                 rb.gravityScale = 0;
                 tempWaitForFlyAttack -= Time.deltaTime;
             }
             else
             {
+                GetComponent<EdgeCollider2D>().isTrigger = false;
                 stopMainAttacks = true;
                 tempFlyingSectionTime -= Time.deltaTime;
                 trail1.SetActive(false);
@@ -184,12 +186,14 @@ public class BossScript : MonoBehaviour
                 objShake.GetComponent<CameraShakerScript>().Shake();
                 trail1.SetActive(true);
                 trail2.SetActive(true);
+                GetComponent<EdgeCollider2D>().isTrigger = true;
                 rb.velocity = new Vector2(rb.velocity.x, 6f);
                 rb.gravityScale = 0;
                 tempWaitForFlyAttack -= Time.deltaTime;
             }
             else
             {
+                GetComponent<EdgeCollider2D>().isTrigger = false;
                 trail1.SetActive(false);
                 trail2.SetActive(false);
                 stopMainAttacks = true;

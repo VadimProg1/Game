@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float moveInput;
     public float speed;
+    public float speedMax;
 
     private bool isGrounded;
     private bool standingOnEnemy;
@@ -37,7 +38,6 @@ public class PlayerController : MonoBehaviour
     public bool dashHit = false;
     private Transform bar;
     private bool healthBarCheck;
-    private TrailRenderer trail;
     private float delayBeforeJump = 0.1f;
     private float tempDelayBeforeJump = 0.1f;
     private int shootingMode = 1;
@@ -50,13 +50,22 @@ public class PlayerController : MonoBehaviour
 
     static public bool freezeBulletsIsBuyed = false;
     static public bool expBulletsIsBuyed = false;
+    static public bool gunIsBuyed = false;
+    static public bool greenSkinIsBuyed = false;
+    static public bool redSkinIsBuyed = false;
+    static public string currentSkin = "Default";
+
+    public TrailRenderer defTrail;
+    public TrailRenderer greenTrail;
+    public TrailRenderer redTrail;
+    static public TrailRenderer trail;
 
     private void Start()
     {
         //tempDelayBeforeJump = delayBeforeJump;
         rb = GetComponent<Rigidbody2D>();
-        trail = GetComponent<TrailRenderer>();
-        trail.enabled = false;
+        // trail = GetComponent<TrailRenderer>();
+        speed = speedMax;
         tempDashTime = dashTime;
         tempDashTimeCooldown = dashTimeCooldown;
         bulletRef = Resources.Load("BulletPlayer");
@@ -65,7 +74,7 @@ public class PlayerController : MonoBehaviour
         bar = transform.Find("HealthBar");
         objShake = GameObject.FindGameObjectWithTag("Shaker");
         tempShootingCooldown = shootingCooldown;
-
+        CheckCurrentSkin();
     }
 
     private void FixedUpdate()
@@ -137,7 +146,7 @@ public class PlayerController : MonoBehaviour
                 shootingMode = 3;
             }
 
-            /*
+            
              if (Input.GetKeyDown(KeyCode.K))
              {
                  animator.SetBool("Death", true);
@@ -146,9 +155,9 @@ public class PlayerController : MonoBehaviour
              {
                  animator.SetBool("Death", false);
              }
-             */
+             
             //Shooting
-            if (Input.GetKeyDown(KeyCode.X) && tempShootingCooldown <= 0)
+            if (Input.GetKeyDown(KeyCode.X) && tempShootingCooldown <= 0 && gunIsBuyed)
             {
                // animator.SetBool("IsJumping", false);              
                 if (shootingMode == 1)
@@ -261,14 +270,100 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void CurrentSkin(string code)
+    {
+        if(code == "Default")
+        {
+            currentSkin = "Default";
+            trail = defTrail;
+        }
+        else if (code == "Green" && greenSkinIsBuyed)
+        {
+            currentSkin = "Green";
+            trail = greenTrail;
+        }
+        else if (code == "Red" && redSkinIsBuyed)
+        {
+            currentSkin = "Red";
+            trail = redTrail;
+        }
+        CheckCurrentSkin();
+    }
+
+    public void CheckCurrentSkin()
+    {
+        if (currentSkin == "Default")
+        {
+            animator.runtimeAnimatorController = Resources.Load("PlayerDefault") as RuntimeAnimatorController;
+            trail = defTrail;
+        }
+        else if (currentSkin == "Green")
+        {
+            animator.runtimeAnimatorController = Resources.Load("PlayerGreen") as RuntimeAnimatorController;
+            trail = greenTrail;
+        }
+        else if (currentSkin == "Red")
+        {
+            animator.runtimeAnimatorController = Resources.Load("PlayerRed") as RuntimeAnimatorController;
+            trail = redTrail;
+        }
+        trail.enabled = false;
+    }
+
+
+    public void GreenSkinIsBuyed()
+    {
+        greenSkinIsBuyed = true;
+    }
+
+    public bool GetGreenSkinIsBuyed()
+    {
+        return greenSkinIsBuyed;
+    }
+
+    public void RedSkinIsBuyed()
+    {
+        redSkinIsBuyed = true;
+    }
+
+    public bool GetRedSkinIsBuyed()
+    {
+        return redSkinIsBuyed;
+    }
+
+    public void GunIsBuyed()
+    {
+        gunIsBuyed = true;
+    }
+
+    public bool GetGunIsBuyed()
+    {
+        return gunIsBuyed;
+    }
+
     public void FreezeIsBuyed()
     {
         freezeBulletsIsBuyed = true;
     }
 
+    public bool GetFreezeIsBuyed()
+    {
+        return freezeBulletsIsBuyed;
+    }
+
     public void ExplosionIsBuyed()
     {
         expBulletsIsBuyed = true;
+    }
+
+    public bool GetExplosionIsBuyed()
+    {
+        return expBulletsIsBuyed;
+    }
+
+    public string GetCurrentSkin()
+    {
+        return currentSkin;
     }
 
     void Flip()

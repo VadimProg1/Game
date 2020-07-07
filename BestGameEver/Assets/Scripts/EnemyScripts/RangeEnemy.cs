@@ -27,6 +27,8 @@ public class RangeEnemy : MonoBehaviour
     public bool SeePlayer;
     private bool facingRight;
     private bool death;
+    private bool firstDeath = true;
+    public bool isSpawned = false;
 
     public Transform bar;
     private bool healthBarCheck;
@@ -35,12 +37,14 @@ public class RangeEnemy : MonoBehaviour
     private Material matWhite;
     private Material matDefault;
     private UnityEngine.Object explosionRef;
+    private UnityEngine.Object coinRef;
     SpriteRenderer sr;
     Vector3 startPos;
 
     Object bulletRef;
     GameObject obj;
     GameObject objShake;
+    public Animator animator;
 
     private bool frozen = false;
     private float timeFreeze = -1;
@@ -51,6 +55,7 @@ public class RangeEnemy : MonoBehaviour
         startPos = transform.position;
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        coinRef = Resources.Load("Coin");
         matDefault = sr.material;
         explosionRef = Resources.Load("Explosion");
         health = maxHealth;
@@ -67,6 +72,7 @@ public class RangeEnemy : MonoBehaviour
         else
         {
             frozen = false;
+            animator.SetBool("IsFrozen", false);
         }
 
         if (!death && !frozen)
@@ -135,6 +141,7 @@ public class RangeEnemy : MonoBehaviour
         freezeBulletCounter++;
         if (freezeBulletCounter >= maxFreezeBulletCounter)
         {
+            animator.SetBool("IsFrozen", true);
             timeFreeze = freezeTime;
             frozen = true;
             freezeBulletCounter = 0;
@@ -145,12 +152,13 @@ public class RangeEnemy : MonoBehaviour
     public void Respawn()
     {
         if (death)
-        {
+        {           
             health = maxHealth;
             sr.enabled = true;
             death = false;
-            GetComponent<BoxCollider2D>().isTrigger = false;
-            GetComponent<EdgeCollider2D>().isTrigger = false;
+            //GetComponent<BoxCollider2D>().isTrigger = false;
+            //GetComponent<EdgeCollider2D>().isTrigger = false;
+            GetComponent<BoxCollider2D>().enabled = true;
             ResetMaterial();
             healthBar.gameObject.SetActive(true);
             healthBar.SetSize(GetHealthPercent());
@@ -176,16 +184,28 @@ public class RangeEnemy : MonoBehaviour
             healthBar.SetSize(GetHealthPercent());
             sr.material = matWhite;
             if (health <= 0)
-            {
+            {              
                 GameObject explosion = (GameObject)Instantiate(explosionRef);
                 explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 SoundManagerScript.PlaySound("enemyDeath");
 
                 death = true;
                 sr.enabled = false;
-                GetComponent<BoxCollider2D>().isTrigger = true;
-                GetComponent<EdgeCollider2D>().isTrigger = true;
+                //GetComponent<BoxCollider2D>().isTrigger = true;
+                //GetComponent<EdgeCollider2D>().isTrigger = true;
+                GetComponent<BoxCollider2D>().enabled = false;
                 healthBar.gameObject.SetActive(false);
+                if (firstDeath)
+                {
+                    firstDeath = false;
+                    GameObject coin = (GameObject)Instantiate(coinRef);
+                    coin.transform.position = new Vector2(transform.position.x, transform.position.y + 0.5f);
+                    coin.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 4);
+                }
+                if (isSpawned)
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {

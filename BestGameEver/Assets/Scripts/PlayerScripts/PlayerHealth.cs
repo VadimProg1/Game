@@ -5,10 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int healthMax;
+    static public int healthMax = 10;
     public int health;
     public int indexOfSceneToRespawn;
     [SerializeField] private HealthBarScript healthBar;
+    public PlayerController playerController;
     public Transform spawnPoint;
     public Transform player;
     public LayerMask meleeEnemies;
@@ -19,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
     public LayerMask flyingEnemies;
     public LayerMask heal;
     public Animator animator;
+    private float respawnTime = 1f;
+    private float tempRespawnTime = 1f;
 
 
     void Start()
@@ -27,10 +30,12 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void RespawnPlayer()
-    {        
+    {
+        animator.SetBool("Death", false);
         player.position = spawnPoint.position;
         health = healthMax;
         healthBar.SetSize(GetHealthPercent());
+        Invoke("ReturnSpeed", .7f);
 
         Collider2D[] respawn = Physics2D.OverlapCircleAll(player.position, 1000000f, meleeEnemies);
         for (int i = 0; i < respawn.Length; i++)
@@ -75,10 +80,24 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void SetMaxHealth(int health)
+    {
+        healthMax = health;
+    }
+
+    void Update()
+    {
+        tempRespawnTime -= Time.deltaTime;
+    }
 
     public float GetHealthPercent()
     {
         return (float)health / (float)healthMax;
+    }
+
+    void ReturnSpeed()
+    {
+        playerController.speed = playerController.speedMax;
     }
 
     public void TakeDamage(int damage)
@@ -86,10 +105,13 @@ public class PlayerHealth : MonoBehaviour
         SoundManagerScript.PlaySound("takenDamage");
         healthBar.SetSize(GetHealthPercent());
         health -= damage;
-        if (health <= 0)
+        if (health <= 0  && tempRespawnTime <= 0)
         {
-            RespawnPlayer();
-        }       
+            tempRespawnTime = respawnTime;
+            animator.SetBool("Death", true);
+            playerController.speed = 0f;
+            Invoke("RespawnPlayer", 0.7f);
+        }
     }
 
     public void TakeHeal(int heal)

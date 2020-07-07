@@ -34,6 +34,7 @@ public class TurretEnemy : MonoBehaviour
     private bool facingRight;
     private bool checkPlayerPosition;
     private bool death = false;
+    private bool firstDeath = true;
 
     public Transform bar;
     private bool healthBarCheck;
@@ -42,6 +43,7 @@ public class TurretEnemy : MonoBehaviour
     private Material matWhite;
     private Material matDefault;
     private UnityEngine.Object explosionRef;
+    private UnityEngine.Object coinRef;
     SpriteRenderer sr;
 
     Object bulletRef;
@@ -56,6 +58,7 @@ public class TurretEnemy : MonoBehaviour
         objShake = GameObject.FindGameObjectWithTag("Shaker");
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        coinRef = Resources.Load("Coin");
         matDefault = sr.material;
         explosionRef = Resources.Load("Explosion");
         health = maxHealth;
@@ -175,6 +178,13 @@ public class TurretEnemy : MonoBehaviour
                 sr.enabled = false;
                 GetComponent<BoxCollider2D>().isTrigger = true;
                 healthBar.gameObject.SetActive(false);
+                if (firstDeath)
+                {
+                    firstDeath = false;
+                    GameObject coin = (GameObject)Instantiate(coinRef);
+                    coin.transform.position = new Vector2(transform.position.x, transform.position.y - 1f);
+                    coin.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 4);
+                }
             }
             else
             {

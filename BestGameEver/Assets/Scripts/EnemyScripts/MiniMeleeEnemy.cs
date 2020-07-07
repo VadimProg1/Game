@@ -25,6 +25,8 @@ public class MiniMeleeEnemy : MonoBehaviour
     public bool SeePlayer;
     private bool facingRight;
     private bool death = false;
+    private bool firstDeath = true;
+    public bool isSpawned = false;
 
     public Transform bar;
     private bool healthBarCheck;
@@ -34,6 +36,7 @@ public class MiniMeleeEnemy : MonoBehaviour
     private Material matDefault;
     private UnityEngine.Object explosionRef;
     private UnityEngine.Object meleeEnemyRef;
+    private UnityEngine.Object coinRef;
     SpriteRenderer sr;
 
     public float jumpTimer;
@@ -59,6 +62,7 @@ public class MiniMeleeEnemy : MonoBehaviour
         startPos = transform.position;
         sr = GetComponent<SpriteRenderer>();
         matWhite = Resources.Load("WhiteFlash", typeof(Material)) as Material;
+        coinRef = Resources.Load("Coin");
         matDefault = sr.material;
         explosionRef = Resources.Load("Explosion");
         meleeEnemyRef = Resources.Load("MeleeEnemy");
@@ -209,9 +213,21 @@ public class MiniMeleeEnemy : MonoBehaviour
                 explosion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 death = true;
                 sr.enabled = false;
-                GetComponent<BoxCollider2D>().isTrigger = true;
-                GetComponent<EdgeCollider2D>().isTrigger = true;
+                //GetComponent<BoxCollider2D>().isTrigger = true;
+                //GetComponent<EdgeCollider2D>().isTrigger = true;
+                GetComponent<BoxCollider2D>().enabled = false;
                 healthBar.gameObject.SetActive(false);
+                if (firstDeath)
+                {
+                    firstDeath = false;
+                    GameObject coin = (GameObject)Instantiate(coinRef);
+                    coin.transform.position = new Vector2(transform.position.x, transform.position.y + 0.5f);
+                    coin.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 4);
+                }
+                if (isSpawned)
+                {
+                    Destroy(gameObject);
+                }
             }
             else
             {
@@ -229,8 +245,9 @@ public class MiniMeleeEnemy : MonoBehaviour
             sr.enabled = true;
             death = false;
             transform.position = new Vector3(startPos.x, startPos.y, startPos.z);
-            GetComponent<BoxCollider2D>().isTrigger = false;
-            GetComponent<EdgeCollider2D>().isTrigger = false;
+            //GetComponent<BoxCollider2D>().isTrigger = false;
+            // GetComponent<EdgeCollider2D>().isTrigger = false;
+            GetComponent<BoxCollider2D>().enabled = true;
             ResetMaterial();
             healthBar.gameObject.SetActive(true);
             healthBar.SetSize(GetHealthPercent());           
